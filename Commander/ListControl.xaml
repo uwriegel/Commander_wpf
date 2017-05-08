@@ -8,11 +8,13 @@
              d:DesignHeight="300" d:DesignWidth="300" >
     <UserControl.Resources>
         <local:FileIconConverter x:Key="FileIconConverter" />
+        <local:FileSizeConverter x:Key="FileSizeConverter" />
     </UserControl.Resources>
     <Grid>
         <ListBox Name="List" Margin="0,0,0,0" BorderThickness="0" 
                  VirtualizingPanel.IsVirtualizing="true" 
-                 VirtualizingPanel.VirtualizationMode="Recycling">
+                 VirtualizingPanel.VirtualizationMode="Recycling"
+                 HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid d:DataContext="{d:DesignData /SampleData/FileItemSampleData.xaml}" >
@@ -23,7 +25,7 @@
                         </Grid.ColumnDefinitions>
                         <Border Width="16" Height="16" Margin="0,-1" Background="{Binding Name, Converter={StaticResource FileIconConverter}}"></Border>
                         <TextBlock Grid.Column="1" Text="{Binding Name}" Margin="0,-1" />
-                        <TextBlock Grid.Column="3" Text="{Binding Size}" Margin="0,-1" />
+                        <TextBlock Grid.Column="3" Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" Margin="0,-1" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

@@ -41,7 +41,7 @@ namespace Commander
                 else
                     di = new DirectoryInfo(@"c:\windows\system32");
                 index++;
-                var files = di.GetFiles().Select(n => new FileItem { Name = n.FullName, Date = n.LastAccessTime.ToString() });
+                var files = di.GetFiles().Select(n => new FileItem { Name = n.FullName, Date = n.LastAccessTime.ToString(), Size = n.Length });
                 List.ItemsSource = files;
             };
         }
