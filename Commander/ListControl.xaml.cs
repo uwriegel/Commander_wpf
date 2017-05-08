@@ -23,9 +23,16 @@ namespace Commander
     {
         public ListControl()
         {
+            ColumnsSizes.Size2 = 130;
+            ColumnsSizes.Size3 = 300;
             InitializeComponent();
             InitializeDirectoryChange();
         }
+
+        public ColumnsSizes ColumnsSizes 
+        {
+            get; set;
+        } = new ColumnsSizes();
 
         void InitializeDirectoryChange()
         {
@@ -33,15 +40,21 @@ namespace Commander
 
             List.MouseRightButtonDown += (s, e) =>
             {
-                DirectoryInfo di;
+                DirectoryInfo di = null;
                 if (index == 0)
                     di = new DirectoryInfo(@"a:\bilder");
                 else if (index == 1)
                     di = new DirectoryInfo(@"c:\windows");
-                else
+                else if (index == 2)
                     di = new DirectoryInfo(@"c:\windows\system32");
+                else
+                {
+                    ColumnsSizes.Size2 = 350;
+                    ColumnsSizes.Size3 = 450;
+                    return;
+                }
                 index++;
-                var files = di.GetFiles().Select(n => new FileItem { Name = n.FullName, Date = n.LastAccessTime.ToString(), Size = n.Length });
+                var files = di.GetFiles().Select(n => new FileItem { Name = n.FullName, Date = n.LastAccessTime, Size = n.Length });
                 List.ItemsSource = files;
             };
         }

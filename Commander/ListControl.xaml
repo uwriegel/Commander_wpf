@@ -9,24 +9,36 @@
     <UserControl.Resources>
         <local:FileIconConverter x:Key="FileIconConverter" />
         <local:FileSizeConverter x:Key="FileSizeConverter" />
+        <local:ColumnsSizes x:Key="ColumnsSizes"/>
     </UserControl.Resources>
-    <Grid>
-        <ListBox Name="List" Margin="0,0,0,0" BorderThickness="0" 
+    <Grid Grid.IsSharedSizeScope="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition SharedSizeGroup="A"/>
+                <ColumnDefinition SharedSizeGroup="B"/>
+                <ColumnDefinition SharedSizeGroup="C"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Name"/>
+            <TextBlock Text="Größe" Grid.Column="1"/>
+            <TextBlock Text="Datum" Grid.Column="2"/>
+        </Grid>
+        <ListBox Name="List" BorderThickness="0" 
+                 Grid.Row="1"
                  VirtualizingPanel.IsVirtualizing="true" 
                  VirtualizingPanel.VirtualizationMode="Recycling"
                  HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid d:DataContext="{d:DesignData /SampleData/FileItemSampleData.xaml}" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Border Width="16" Height="16" Margin="0,-1" Background="{Binding Name, Converter={StaticResource FileIconConverter}}"></Border>
-                        <TextBlock Grid.Column="1" Text="{Binding Name}" Margin="0,-1" />
-                        <TextBlock Grid.Column="3" Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" Margin="0,-1" />
-                    </Grid>
+                    <Canvas d:DataContext="{d:DesignData /SampleData/FileItemSampleData.xaml}" Height="16" >
+                        <Border Width="16" Height="16" Background="{Binding Name, Converter={StaticResource FileIconConverter}}" HorizontalAlignment="Left"></Border>
+                        <TextBlock Text="{Binding Name}" Canvas.Left="20" Background="White" />
+                        <TextBlock Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" Canvas.Left="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}" Background="White" />
+                        <TextBlock Text="{Binding Date}" Canvas.Left="{Binding ColumnsSizes.Size3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}" Background="White"/>
+                    </Canvas>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
