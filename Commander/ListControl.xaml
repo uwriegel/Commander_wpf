@@ -35,9 +35,10 @@
                 <DataTemplate>
                     <Canvas d:DataContext="{d:DesignData /SampleData/FileItemSampleData.xaml}" Height="16" >
                         <Border Width="16" Height="16" Background="{Binding Name, Converter={StaticResource FileIconConverter}}" HorizontalAlignment="Left"></Border>
-                        <TextBlock Text="{Binding Name}" Canvas.Left="20" Background="White" />
-                        <TextBlock Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" Canvas.Left="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}" Background="White" />
-                        <TextBlock Text="{Binding Date}" Canvas.Left="{Binding ColumnsSizes.Size3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}" Background="White"/>
+                        <TextBlock Text="{Binding Name}" Canvas.Left="20" />
+                        <TextBlock Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" Canvas.Left="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"  />
+                        <TextBlock Text="{Binding Date}" Canvas.Left="{Binding ColumnsSizes.Size3, 
+                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}" />
                     </Canvas>
                 </DataTemplate>
             </ListBox.ItemTemplate>

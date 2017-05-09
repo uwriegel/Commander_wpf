@@ -4,6 +4,17 @@
              xmlns:local="clr-namespace:Commander"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/LightTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="ListBox">
+                <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
+            </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}" />
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

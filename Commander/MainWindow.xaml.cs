@@ -76,5 +76,14 @@ namespace Commander
                 Settings.Default.Save();
             }
         }
+
+        void MenuItemDarkTheme_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Resources.MergedDictionaries.Clear();
+            if ((e.OriginalSource as MenuItem).IsChecked)
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Themes/DarkTheme.xaml", UriKind.Relative) });
+            else
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Themes/LightTheme.xaml", UriKind.Relative) });
+        }
     }
 }
