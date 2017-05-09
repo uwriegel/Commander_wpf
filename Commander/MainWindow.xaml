@@ -80,26 +80,8 @@
         <StatusBar DockPanel.Dock="Bottom">
             <TextBlock Text="{Binding ItemName}" />
         </StatusBar>
-        <local:ColumnsControl SnapsToDevicePixels="True"
-                              Background="White">
-            <local:ColumnsControl.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-                    <Setter Property="Padding" Value="5, 0" />
-                    <Setter Property="Background" Value="Blue" />
-                    <Setter Property="Foreground" Value="White" />
-                </Style>
-            </local:ColumnsControl.Resources>
-            <local:ColumnsControl.Children>
-                <TextBlock Text="Name"/>
-                <TextBlock Text="Erw."/>
-                <TextBlock Text="Datum"/>
-                <TextBlock Text="Größe"/>
-                <TextBlock Text="Version"/>
-            </local:ColumnsControl.Children>
-        </local:ColumnsControl>
-        <!--<Grid>
+        <Grid>
             <local:ListControl />
-        </Grid>-->
+        </Grid>
     </DockPanel>
 </Window>

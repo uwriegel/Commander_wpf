@@ -12,6 +12,8 @@ namespace Commander
 {
     public class ColumnsControl : Canvas
     {
+        public event EventHandler<ColumnSizeChangedEventArgs> ColumnSizeChangedEvent;
+
         public ColumnsControl()
         {
             Height = 16;
@@ -107,6 +109,7 @@ namespace Commander
                 tb.Width = lengths[i] - 1;
                 left += lengths[i];
             }
+            ColumnSizeChangedEvent?.Invoke(this, new ColumnSizeChangedEventArgs(lengths));
         }
 
         bool isSizable = false;

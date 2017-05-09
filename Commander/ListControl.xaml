@@ -16,16 +16,25 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition SharedSizeGroup="A"/>
-                <ColumnDefinition SharedSizeGroup="B"/>
-                <ColumnDefinition SharedSizeGroup="C"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Name"/>
-            <TextBlock Text="Größe" Grid.Column="1"/>
-            <TextBlock Text="Datum" Grid.Column="2"/>
-        </Grid>
+        <local:ColumnsControl x:Name="ColumnsControl"
+                              SnapsToDevicePixels="True"
+                              Background="White">
+            <local:ColumnsControl.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="Padding" Value="5, 0" />
+                    <Setter Property="Background" Value="Blue" />
+                    <Setter Property="Foreground" Value="White" />
+                </Style>
+            </local:ColumnsControl.Resources>
+            <local:ColumnsControl.Children>
+                <TextBlock Text="Name"/>
+                <TextBlock Text="Erw."/>
+                <TextBlock Text="Datum"/>
+                <TextBlock Text="Größe"/>
+                <TextBlock Text="Version"/>
+            </local:ColumnsControl.Children>
+        </local:ColumnsControl>
         <ListBox Name="List" BorderThickness="0" 
                  Grid.Row="1"
                  VirtualizingPanel.IsVirtualizing="true" 
@@ -33,12 +42,26 @@
                  HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
+                    <DataTemplate.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                        </Style>
+                    </DataTemplate.Resources>
                     <Canvas d:DataContext="{d:DesignData /SampleData/FileItemSampleData.xaml}" Height="16" >
                         <Border Width="16" Height="16" Background="{Binding Name, Converter={StaticResource FileIconConverter}}" HorizontalAlignment="Left"></Border>
-                        <TextBlock Text="{Binding Name}" Canvas.Left="20" />
-                        <TextBlock Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" Canvas.Left="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"  />
-                        <TextBlock Text="{Binding Date}" Canvas.Left="{Binding ColumnsSizes.Size3, 
-                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}" />
+                        <TextBlock Text="{Binding Name}" Canvas.Left="20" Width="{Binding ColumnsSizes.Size1, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
+                        <TextBlock Text="{Binding Extension}" 
+                                   Width="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                   Canvas.Left="{Binding ColumnsSizes.Left2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
+                        <TextBlock Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" 
+                                   Width="{Binding ColumnsSizes.Size3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                   Canvas.Left="{Binding ColumnsSizes.Left3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"  />
+                        <TextBlock Text="{Binding Date}" 
+                                   Width="{Binding ColumnsSizes.Size4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                   Canvas.Left="{Binding ColumnsSizes.Left4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
+                        <TextBlock Text="{Binding Version}" 
+                                   Width="{Binding ColumnsSizes.Size5, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                   Canvas.Left="{Binding ColumnsSizes.Left5, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
                     </Canvas>
                 </DataTemplate>
             </ListBox.ItemTemplate>

@@ -23,10 +23,9 @@ namespace Commander
     {
         public ListControl()
         {
-            ColumnsSizes.Size2 = 130;
-            ColumnsSizes.Size3 = 300;
             InitializeComponent();
             InitializeDirectoryChange();
+            SizeChanged += ListControl_SizeChanged;
         }
 
         public ColumnsSizes ColumnsSizes 
@@ -57,6 +56,37 @@ namespace Commander
                 var files = di.GetFiles().Select(n => new FileItem { Name = n.FullName, Date = n.LastAccessTime, Size = n.Length });
                 List.ItemsSource = files;
             };
+        }
+
+        void ListControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            SizeChanged -= ListControl_SizeChanged;
+            ColumnsControl.ColumnSizeChangedEvent += ColumnsControl_ColumnSizeChangedEvent;
+        }
+
+        void ColumnsControl_ColumnSizeChangedEvent(object sender, ColumnSizeChangedEventArgs e)
+        {
+            ColumnsSizes.Size1 = e.Lengths[0] - 30;
+            if (e.Lengths.Length > 1)
+            {
+                ColumnsSizes.Size2 = e.Lengths[1] - 10;
+                ColumnsSizes.Left2 = e.Lengths[0];
+            }
+            if (e.Lengths.Length > 2)
+            {
+                ColumnsSizes.Size3 = e.Lengths[2] - 10;
+                ColumnsSizes.Left3 = ColumnsSizes.Left2 + e.Lengths[1];
+            }
+            if (e.Lengths.Length > 3)
+            {
+                ColumnsSizes.Size4 = e.Lengths[3] - 10;
+                ColumnsSizes.Left4 = ColumnsSizes.Left3 + e.Lengths[2];
+            }
+            if (e.Lengths.Length > 4)
+            {
+                ColumnsSizes.Size5 = e.Lengths[4] - 10;
+                ColumnsSizes.Left5 = ColumnsSizes.Left4 + e.Lengths[3];
+            }
         }
     }
 }

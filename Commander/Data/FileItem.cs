@@ -9,7 +9,9 @@ namespace Commander
     public class FileItem
     {
         public string Name { get; set; }
+        public string Extension { get; set; }
         public DateTime Date { get; set; }
         public long Size { get; set; }
+        public string Version { get; set; }
     }
 }

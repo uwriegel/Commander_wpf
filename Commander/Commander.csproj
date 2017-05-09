@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ColumnsControl.cs" />
+    <Compile Include="EventArgs\ColumnSizeChangedEventArgs.cs" />
     <Compile Include="ColumnsSizes.cs" />
     <Compile Include="ValueConverters\FileSizeConverter.cs" />
     <Page Include="ListControl.xaml">
@@ -127,5 +128,6 @@
   <ItemGroup>
     <None Include="Resources\Kirk.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
