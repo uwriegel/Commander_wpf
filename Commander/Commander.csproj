@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ColumnsControl.cs" />
     <Compile Include="ColumnsSizes.cs" />
     <Compile Include="ValueConverters\FileSizeConverter.cs" />
     <Page Include="ListControl.xaml">
