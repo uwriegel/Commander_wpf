@@ -9,7 +9,18 @@
         Title="Commander" Closing="Window_Closing">
     <DockPanel>
         <Menu IsMainMenu="True"
+              Background="White"
               DockPanel.Dock="Top">
+            <Menu.Resources>
+                <Style TargetType="Menu">
+                    <Setter Property="Height" Value="5"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter Property="Height" Value="18"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Menu.Resources>
             <MenuItem Header="_Datei">
                 <MenuItem Header="_Umbenennen"
                           Command="{Binding Rename}"
@@ -36,9 +47,9 @@
                           Command="local:MainWindow.NewItemCommand"
                           InputGestureText="Strg+N" />-->
                 <Separator />
-                <!--<MenuItem Header="_Beenden"
+                <MenuItem Header="_Beenden"
                           Click="Exit_Click"
-                          InputGestureText="ALT+F4" />-->
+                          InputGestureText="ALT+F4" />
             </MenuItem>
             <MenuItem Header="_Navigation">
                 <MenuItem Header="_Erstes Element"
@@ -77,8 +88,9 @@
                           InputGestureText="STRG+F2" />-->
             </MenuItem>
         </Menu>
-        <StatusBar DockPanel.Dock="Bottom">
-            <TextBlock Text="{Binding ItemName}" />
+        <StatusBar DockPanel.Dock="Bottom"
+                   Background="Blue">
+            <TextBlock Text="File" Foreground="White" />
         </StatusBar>
         <Grid>
             <local:ListControl />
