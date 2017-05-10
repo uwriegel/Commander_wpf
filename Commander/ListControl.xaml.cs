@@ -53,8 +53,21 @@ namespace Commander
                     return;
                 }
                 index++;
-                var files = di.GetFiles().Select(n => new FileItem { Name = n.FullName, Date = n.LastAccessTime, Size = n.Length });
+                var files = di.GetFiles().Select(n => new FileItem { Name = n.FullName, Date = n.LastAccessTime, Size = n.Length }).ToArray();
                 List.ItemsSource = files;
+
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        foreach (var item in files)
+                            item.Version = FileVersion.Get(item.Name);
+                    }
+                    catch
+                    {
+                    }
+
+                });
             };
         }
 

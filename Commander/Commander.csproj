@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\Kirk.ico</ApplicationIcon>
@@ -61,6 +63,7 @@
     <Compile Include="ColumnsControl.cs" />
     <Compile Include="EventArgs\ColumnSizeChangedEventArgs.cs" />
     <Compile Include="ColumnsSizes.cs" />
+    <Compile Include="FileVersionInfo.cs" />
     <Compile Include="ValueConverters\FileSizeConverter.cs" />
     <Page Include="ListControl.xaml">
       <SubType>Designer</SubType>
