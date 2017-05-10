@@ -26,6 +26,16 @@ namespace Commander
             InitializeComponent();
             InitializeDirectoryChange();
             SizeChanged += ListControl_SizeChanged;
+            PreviewMouseDown += ListControl_PreviewMouseDown;
+        }
+
+        void ListControl_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var item = ItemsControl.ContainerFromElement(List, e.OriginalSource as DependencyObject) as ListBoxItem;
+            if (item != null)
+            {
+                (item.DataContext as FileItem).IsSelected = !(item.DataContext as FileItem).IsSelected;
+            }
         }
 
         public ColumnsSizes ColumnsSizes 

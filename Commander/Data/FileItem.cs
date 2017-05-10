@@ -36,8 +36,22 @@ namespace Commander
                 }
             }
         }
-        string _Version = "Aff";
-        
+        string _Version;
+
+        public bool IsSelected
+        {
+            get { return _IsSelected; }
+            set
+            {
+                if (_IsSelected != value)
+                {
+                    _IsSelected = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsSelected"));
+                }
+            }
+        }
+        bool _IsSelected;
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

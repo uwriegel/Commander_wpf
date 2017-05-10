@@ -40,9 +40,50 @@
                  VirtualizingPanel.IsVirtualizing="true" 
                  VirtualizingPanel.VirtualizationMode="Recycling"
                  HorizontalContentAlignment="Stretch">
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border Name="Border" SnapsToDevicePixels="true" Background="LightSkyBlue" Margin="0">
+                                    <ContentPresenter/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <!--<Trigger Property="IsSelected" Value="true">
+                                        <Setter TargetName="Border" Property="Background" Value="Red"/>
+                                    </Trigger>-->
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Margin" Value="0"></Setter>
+                    <Setter Property="Padding" Value="0,0,0,0"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Red"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Yellow"></Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DataTemplate.Resources>
+
+
+                        <Style TargetType="Canvas">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                    <Setter Property="Background" Value="Yellow" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+
+
+
                         <Style TargetType="TextBlock">
                             <Setter Property="TextTrimming" Value="CharacterEllipsis" />
                         </Style>
