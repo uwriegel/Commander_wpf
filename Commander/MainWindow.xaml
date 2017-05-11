@@ -69,7 +69,7 @@
             <TextBlock Text="{Binding StatusBar.Text}" Foreground="White" />
         </StatusBar>
         <Grid>
-            <local:ListControl />
+            <local:FileItemControl />
         </Grid>
     </DockPanel>
 </Window>

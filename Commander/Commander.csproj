@@ -65,8 +65,15 @@
     <Compile Include="Data\StatusBar.cs" />
     <Compile Include="EventArgs\ColumnSizeChangedEventArgs.cs" />
     <Compile Include="ColumnsSizes.cs" />
+    <Compile Include="FileItemControl.xaml.cs">
+      <DependentUpon>FileItemControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FileVersionInfo.cs" />
     <Compile Include="ValueConverters\FileSizeConverter.cs" />
+    <Page Include="FileItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ListControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

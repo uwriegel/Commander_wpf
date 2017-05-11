@@ -37,7 +37,7 @@ namespace Commander
                 Width = Settings.Default.WindowWidth;
                 WindowState = Settings.Default.WindowState;
             }
-            //MenuItemDarkTheme.IsChecked = Settings.Default.DarkTheme;
+            MenuItemDarkTheme.IsChecked = Settings.Default.DarkTheme;
             SizeToFit();
             MoveIntoView();
         }
