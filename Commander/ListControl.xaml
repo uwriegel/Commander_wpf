@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <local:ColumnsControl x:Name="ColumnsControl"
                               SnapsToDevicePixels="True"
-                              Background="White">
+                              Background="{DynamicResource BackgroundColor}">
             <local:ColumnsControl.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="TextTrimming" Value="CharacterEllipsis" />
@@ -46,7 +46,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <Border Name="Border" SnapsToDevicePixels="true" Background="LightSkyBlue" >
+                                <Border Name="Border" SnapsToDevicePixels="true" >
                                     <ContentPresenter/>
                                 </Border>
                             </ControlTemplate>
@@ -64,7 +64,7 @@
                         <Style TargetType="Border">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                    <Setter Property="Background" Value="Yellow" />
+                                    <Setter Property="Background" Value="Blue" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -103,7 +103,7 @@
                             </Canvas>
                         </Border>
                         <Border Style="{StaticResource Rahmen}" 
-                                BorderThickness="1" BorderBrush="Blue" Background="Transparent"></Border>
+                                BorderThickness="1" BorderBrush="Red" Background="Transparent"></Border>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
