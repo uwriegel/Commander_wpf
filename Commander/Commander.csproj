@@ -61,6 +61,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ColumnsControl.cs" />
+    <Compile Include="Data\MainWindowDataContext.cs" />
+    <Compile Include="Data\StatusBar.cs" />
     <Compile Include="EventArgs\ColumnSizeChangedEventArgs.cs" />
     <Compile Include="ColumnsSizes.cs" />
     <Compile Include="FileVersionInfo.cs" />

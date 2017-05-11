@@ -13,7 +13,7 @@
               DockPanel.Dock="Top">
             <Menu.Resources>
                 <Style TargetType="Menu">
-                    <Setter Property="Height" Value="5"/>
+                    <Setter Property="Height" Value="0"/>
                     <Style.Triggers>
                         <Trigger Property="IsKeyboardFocusWithin" Value="True">
                             <Setter Property="Height" Value="18"/>
@@ -80,7 +80,7 @@
                 <MenuItem Header="_Exif-Datum"
                           IsCheckable="True" />
                 <Separator />
-                <MenuItem Header="_Dunkles Thema"
+                <MenuItem Header="_Dunkles Thema" Name="MenuItemDarkTheme"
                           IsCheckable="True" Click="MenuItemDarkTheme_Click" />
                 <Separator />
                 <!--<MenuItem Header="_Mehrfach umbenennen"
@@ -90,7 +90,7 @@
         </Menu>
         <StatusBar DockPanel.Dock="Bottom"
                    Background="Blue">
-            <TextBlock Text="File" Foreground="White" />
+            <TextBlock Text="{Binding StatusBar.Text}" Foreground="White" />
         </StatusBar>
         <Grid>
             <local:ListControl />

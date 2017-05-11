@@ -17,7 +17,7 @@ namespace Commander
             set
             {
                 _Date = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Date"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Date)));
             }
         }
         DateTime _Date;
@@ -32,7 +32,7 @@ namespace Commander
                 if (_Version != value)
                 {
                     _Version = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Version"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Version)));
                 }
             }
         }
@@ -46,7 +46,7 @@ namespace Commander
                 if (_IsSelected != value)
                 {
                     _IsSelected = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsSelected"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsSelected)));
                 }
             }
         }

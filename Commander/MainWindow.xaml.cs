@@ -23,6 +23,8 @@ namespace Commander
     {
         public MainWindow()
         {
+            ChooseTheme();
+            DataContext = new MainWindowDataContext();
             InitializeComponent();
             if (Settings.Default.WindowTop != 0 ||
                 Settings.Default.WindowLeft != 0 ||
@@ -35,6 +37,7 @@ namespace Commander
                 Width = Settings.Default.WindowWidth;
                 WindowState = Settings.Default.WindowState;
             }
+            MenuItemDarkTheme.IsChecked = Settings.Default.DarkTheme;
             SizeToFit();
             MoveIntoView();
         }
@@ -63,6 +66,14 @@ namespace Commander
                 Left = 0;
         }
 
+        void ChooseTheme()
+        {
+            if (Settings.Default.DarkTheme)
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Themes/DarkTheme.xaml", UriKind.Relative) });
+            else
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Themes/LightTheme.xaml", UriKind.Relative) });
+        }
+
         void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (WindowState != WindowState.Minimized)
@@ -80,13 +91,11 @@ namespace Commander
         void MenuItemDarkTheme_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Resources.MergedDictionaries.Clear();
-            if ((e.OriginalSource as MenuItem).IsChecked)
-                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Themes/DarkTheme.xaml", UriKind.Relative) });
-            else
-                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Themes/LightTheme.xaml", UriKind.Relative) });
+            Settings.Default.DarkTheme = (e.OriginalSource as MenuItem).IsChecked;
+            ChooseTheme();
         }
 
-        private void Exit_Click(object sender, RoutedEventArgs e)
+        void Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }

@@ -82,5 +82,17 @@ namespace Commander.Properties {
                 this["WindowState"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DarkTheme {
+            get {
+                return ((bool)(this["DarkTheme"]));
+            }
+            set {
+                this["DarkTheme"] = value;
+            }
+        }
     }
 }
