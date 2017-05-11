@@ -23,29 +23,19 @@
             </Menu.Resources>
             <MenuItem Header="_Datei">
                 <MenuItem Header="_Umbenennen"
-                          Command="{Binding Rename}"
                           InputGestureText="F2" />
                 <MenuItem Header="_Kopieren"
-                          Command="{Binding Copy}"
                           InputGestureText="F5" />
                 <MenuItem Header="_Verschieben"
-                          Command="{Binding Move}"
                           InputGestureText="F6" />
                 <MenuItem Header="_Löschen"
-                          Command="{Binding Delete}"
                           InputGestureText="Entf" />
                 <Separator />
                 <MenuItem Header="_Favorit übernehmen"
-                          Command="{Binding AddToFavorites}"
                           InputGestureText="STRG+F1" />
                 <Separator />
                 <MenuItem Header="_Eigenschaften"
-                          Command="{Binding ShowProperties}"
                           InputGestureText="ALT+ENTER" />
-                <Separator />
-                <!--<MenuItem Header="_Neu"
-                          Command="local:MainWindow.NewItemCommand"
-                          InputGestureText="Strg+N" />-->
                 <Separator />
                 <MenuItem Header="_Beenden"
                           Click="Exit_Click"
@@ -57,16 +47,6 @@
                 <MenuItem Header="_Favoriten"
                           InputGestureText="F1" />
             </MenuItem>
-            <MenuItem Header="_Tab">
-                <!--<MenuItem Header="_Neuen Tab"
-                          InputGestureText="F8"
-                          Command="local:MainWindow.NewTabCommand" />-->
-                <MenuItem Header="Tab _wechseln"
-                          InputGestureText="Strg+TAB" />
-                <!--<MenuItem Header="Tab _löschen"
-                          InputGestureText="Strg+F8"
-                          Command="local:MainWindow.DeleteTabCommand" />-->
-            </MenuItem>
             <MenuItem Header="_Selektion">
                 <MenuItem Header="_Alles"
                           InputGestureText="NUM +" />
@@ -74,18 +54,14 @@
                           InputGestureText="NUM -" />
             </MenuItem>
             <MenuItem Header="_Ansicht">
-                <!--<MenuItem Header="_Versteckte Dateien"
+                <MenuItem Header="_Versteckte Dateien"
                           IsCheckable="True"
-                          Click="ShowHidden_Click" />-->
+                          />
                 <MenuItem Header="_Exif-Datum"
                           IsCheckable="True" />
                 <Separator />
                 <MenuItem Header="_Dunkles Thema" Name="MenuItemDarkTheme"
                           IsCheckable="True" Click="MenuItemDarkTheme_Click" />
-                <Separator />
-                <!--<MenuItem Header="_Mehrfach umbenennen"
-                          Command="local:MainWindow.RenameFilesChangePrefixCommand"
-                          InputGestureText="STRG+F2" />-->
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom"

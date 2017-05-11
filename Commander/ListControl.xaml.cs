@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Commander
 {
@@ -27,15 +28,47 @@ namespace Commander
             InitializeDirectoryChange();
             SizeChanged += ListControl_SizeChanged;
             PreviewMouseDown += ListControl_PreviewMouseDown;
+            KeyDown += ListControl_KeyDown;
+        }
+
+        void SelectAll()
+        {
+            foreach (var fileItem in List.ItemsSource as FileItem[] ?? new FileItem[0])
+                fileItem.IsSelected = true;
+        }
+
+        void UnselectAll()
+        {
+            foreach (var fileItem in List.ItemsSource as FileItem[] ?? new FileItem[0])
+                fileItem.IsSelected = false;
+        }
+
+        void ListControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Add:
+                    SelectAll();
+                    break;
+                case Key.Subtract:
+                    UnselectAll();
+                    break;
+                case Key.Insert:
+                    var fileItem = ((e.OriginalSource as ListBoxItem).DataContext as FileItem);
+                    fileItem.IsSelected = !fileItem.IsSelected;
+                    var index = List.ItemContainerGenerator.IndexFromContainer(e.OriginalSource as ListBoxItem);
+                    var next = List.ItemContainerGenerator.ContainerFromIndex(index + 1) as ListBoxItem;
+                    next?.Focus();
+                    break;
+                    
+            }
         }
 
         void ListControl_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var item = ItemsControl.ContainerFromElement(List, e.OriginalSource as DependencyObject) as ListBoxItem;
             if (item != null)
-            {
                 (item.DataContext as FileItem).IsSelected = !(item.DataContext as FileItem).IsSelected;
-            }
         }
 
         public ColumnsSizes ColumnsSizes 
@@ -65,6 +98,8 @@ namespace Commander
                 index++;
                 var files = di.GetFiles().Select(n => new FileItem { Name = n.FullName, Date = n.LastAccessTime, Size = n.Length }).ToArray();
                 List.ItemsSource = files;
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(() =>
+                    (List.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem)?.Focus()));
 
                 Task.Run(() =>
                 {
