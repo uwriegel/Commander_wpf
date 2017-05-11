@@ -28,7 +28,7 @@ namespace Commander
             InitializeDirectoryChange();
             SizeChanged += ListControl_SizeChanged;
             PreviewMouseDown += ListControl_PreviewMouseDown;
-            KeyDown += ListControl_KeyDown;
+            PreviewKeyDown += ListControl_PreviewKeyDown;
         }
 
         void SelectAll()
@@ -43,7 +43,7 @@ namespace Commander
                 fileItem.IsSelected = false;
         }
 
-        void ListControl_KeyDown(object sender, KeyEventArgs e)
+        void ListControl_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
@@ -60,7 +60,22 @@ namespace Commander
                     var next = List.ItemContainerGenerator.ContainerFromIndex(index + 1) as ListBoxItem;
                     next?.Focus();
                     break;
-                    
+                case Key.Home when (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift:
+                    index = List.ItemContainerGenerator.IndexFromContainer(e.OriginalSource as ListBoxItem);
+                    for (var i = 0; i <= index; i++)
+                        (List.ItemsSource as FileItem[])[i].IsSelected = true;
+                    for (var i = index + 1; i < (List.ItemsSource as FileItem[]).Length; i++)
+                        (List.ItemsSource as FileItem[])[i].IsSelected = false;
+                    e.Handled = true;
+                    break;
+                case Key.End when (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift:
+                    index = List.ItemContainerGenerator.IndexFromContainer(e.OriginalSource as ListBoxItem);
+                    for (var i = 0; i < index; i++)
+                        (List.ItemsSource as FileItem[])[i].IsSelected = false;
+                    for (var i = index; i < (List.ItemsSource as FileItem[]).Length; i++)
+                        (List.ItemsSource as FileItem[])[i].IsSelected = true;
+                    e.Handled = true;
+                    break;
             }
         }
 
