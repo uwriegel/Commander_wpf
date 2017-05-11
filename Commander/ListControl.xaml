@@ -46,35 +46,22 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <Border Name="Border" SnapsToDevicePixels="true" Background="LightSkyBlue" Margin="0">
+                                <Border Name="Border" SnapsToDevicePixels="true" Background="LightSkyBlue" >
                                     <ContentPresenter/>
                                 </Border>
-                                <ControlTemplate.Triggers>
-                                    <!--<Trigger Property="IsSelected" Value="true">
-                                        <Setter TargetName="Border" Property="Background" Value="Red"/>
-                                    </Trigger>-->
-                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
                     <Setter Property="Margin" Value="0"></Setter>
-                    <Setter Property="Padding" Value="0,0,0,0"></Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="Red"></Setter>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="Yellow"></Setter>
-                        </Trigger>
-                    </Style.Triggers>
+                    <Setter Property="Padding" Value="0"></Setter>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 </Style>
             </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DataTemplate.Resources>
 
-
-                        <Style TargetType="Canvas">
+                        <Style TargetType="Border">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsSelected}" Value="True">
                                     <Setter Property="Background" Value="Yellow" />
@@ -82,28 +69,42 @@
                             </Style.Triggers>
                         </Style>
 
+                        <Style TargetType="Border" x:Key="Rahmen">
+                            <Setter Property="Visibility" Value="Hidden"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsFocused, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
 
 
                         <Style TargetType="TextBlock">
                             <Setter Property="TextTrimming" Value="CharacterEllipsis" />
                         </Style>
                     </DataTemplate.Resources>
-                    <Canvas d:DataContext="{d:DesignData /SampleData/FileItemSampleData.xaml}" Height="16" >
-                        <Border Width="16" Height="16" Background="{Binding Name, Converter={StaticResource FileIconConverter}}" HorizontalAlignment="Left"></Border>
-                        <TextBlock Text="{Binding Name}" Canvas.Left="20" Width="{Binding ColumnsSizes.Size1, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
-                        <TextBlock Text="{Binding Extension}" 
-                                   Width="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
-                                   Canvas.Left="{Binding ColumnsSizes.Left2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
-                        <TextBlock Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" 
-                                   Width="{Binding ColumnsSizes.Size3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
-                                   Canvas.Left="{Binding ColumnsSizes.Left3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"  />
-                        <TextBlock Text="{Binding Date}" 
-                                   Width="{Binding ColumnsSizes.Size4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
-                                   Canvas.Left="{Binding ColumnsSizes.Left4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
-                        <TextBlock Text="{Binding Version}" 
-                                   Width="{Binding ColumnsSizes.Size5, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
-                                   Canvas.Left="{Binding ColumnsSizes.Left5, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
-                    </Canvas>
+                    <Grid>
+                        <Border d:DataContext="{d:DesignData /SampleData/FileItemSampleData.xaml}" Padding="1">
+                            <Canvas  Height="16" >
+                                <Border Width="16" Height="16" Background="{Binding Name, Converter={StaticResource FileIconConverter}}" HorizontalAlignment="Left"></Border>
+                                <TextBlock Text="{Binding Name}" Canvas.Left="20" Width="{Binding ColumnsSizes.Size1, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
+                                <TextBlock Text="{Binding Extension}" 
+                                       Width="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                       Canvas.Left="{Binding ColumnsSizes.Left2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
+                                <TextBlock Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" 
+                                       Width="{Binding ColumnsSizes.Size3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                       Canvas.Left="{Binding ColumnsSizes.Left3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"  />
+                                <TextBlock Text="{Binding Date}" 
+                                       Width="{Binding ColumnsSizes.Size4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                       Canvas.Left="{Binding ColumnsSizes.Left4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
+                                <TextBlock Text="{Binding Version}" 
+                                       Width="{Binding ColumnsSizes.Size5, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                       Canvas.Left="{Binding ColumnsSizes.Left5, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
+                            </Canvas>
+                        </Border>
+                        <Border Style="{StaticResource Rahmen}" 
+                                BorderThickness="1" BorderBrush="Blue" Background="Transparent"></Border>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
