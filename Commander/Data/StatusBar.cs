@@ -11,7 +11,7 @@ namespace Commander
     {
         public static StatusBar Current { get; } = new StatusBar();
 
-        public string Text
+        public string Text 
         {
             get { return _Text; }
             set

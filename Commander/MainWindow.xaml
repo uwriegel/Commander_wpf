@@ -64,10 +64,10 @@
                           IsCheckable="True" Click="MenuItemDarkTheme_Click" />
             </MenuItem>
         </Menu>
-        <StatusBar DockPanel.Dock="Bottom"
-                   Background="Blue">
-            <TextBlock Text="{Binding StatusBar.Text}" Foreground="White" />
-        </StatusBar>
+        <TextBlock DockPanel.Dock="Bottom"
+                   Background="Blue"
+                   Foreground="White" Text="{Binding StatusBar.Text}" Height="19" Padding="1" >
+        </TextBlock>
         <Grid>
             <local:FileItemControl />
         </Grid>
