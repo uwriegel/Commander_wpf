@@ -17,15 +17,26 @@ using System.Windows.Threading;
 
 namespace Commander
 {
-    /// <summary>
-    /// Interaktionslogik für ListControl.xaml
-    /// </summary>
     public partial class ListControl : UserControl
     {
+        public FileItem[] Items
+        {
+            get { return GetValue(ItemsProperty) as FileItem[]; }
+            set { SetValue(ItemsProperty, value); }
+        }
+        public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register("Items", typeof(FileItem[]), typeof(ListControl),
+            new PropertyMetadata(Items_PropertyChanged));
+        static void Items_PropertyChanged(DependencyObject dO, DependencyPropertyChangedEventArgs e)
+        {
+            var listControl = dO as ListControl;
+            listControl.List.ItemsSource = e.NewValue as FileItem[];
+            listControl.Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(() =>
+                (listControl.List.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem)?.Focus()));
+        }
+
         public ListControl()
         {
             InitializeComponent();
-            InitializeDirectoryChange();
             SizeChanged += ListControl_SizeChanged;
             PreviewMouseDown += ListControl_PreviewMouseDown;
             PreviewKeyDown += ListControl_PreviewKeyDown;
@@ -90,46 +101,6 @@ namespace Commander
         {
             get; set;
         } = new ColumnsSizes();
-
-        void InitializeDirectoryChange()
-        {
-            var index = 0;
-
-            List.MouseRightButtonDown += (s, e) =>
-            {
-                DirectoryInfo di = null;
-                if (index == 0)
-                    di = new DirectoryInfo(@"a:\bilder");
-                else if (index == 1)
-                    di = new DirectoryInfo(@"c:\windows");
-                else if (index == 2)
-                    di = new DirectoryInfo(@"c:\windows\system32");
-                else
-                {
-                    ColumnsSizes.Size2 = 350;
-                    ColumnsSizes.Size3 = 450;
-                    return;
-                }
-                index++;
-                var files = di.GetFiles().Select(n => new FileItem { Name = n.FullName, Date = n.LastAccessTime, Size = n.Length }).ToArray();
-                List.ItemsSource = files;
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(() =>
-                    (List.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem)?.Focus()));
-
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        foreach (var item in files)
-                            item.Version = FileVersion.Get(item.Name);
-                    }
-                    catch
-                    {
-                    }
-
-                });
-            };
-        }
 
         void ListControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {

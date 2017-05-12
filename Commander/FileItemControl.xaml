@@ -9,6 +9,6 @@
     <DockPanel>
         <TextBox DockPanel.Dock="Top" Background="{DynamicResource BackgroundColor}" 
                  Foreground="{DynamicResource ForegroundColor}"/>
-        <local:ListControl />
+        <local:ListControl x:Name="List"/>
     </DockPanel>
 </UserControl>
