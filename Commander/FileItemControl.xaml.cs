@@ -22,12 +22,18 @@ namespace Commander
         {
             InitializeComponent();
             var di = new DirectoryInfo(@"c:\windows\system32");
-            items = Enumerable.Repeat((Item)new ParentItem(), 1).Concat(di.GetFiles().Select(n => new FileItem
-            {
-                Name = n.FullName,
-                Date = n.LastAccessTime,
-                Size = n.Length
-            })).ToArray();
+            items = Enumerable.Repeat((Item)new ParentItem(), 1)
+                .Concat(di.GetDirectories().Select(n => new DirectoryItem
+                {
+                    Name = n.FullName,
+                    Date = n.LastAccessTime
+                }))
+                .Concat(di.GetFiles().Select(n => new FileItem
+                {
+                    Name = n.FullName,
+                    Date = n.LastAccessTime,
+                    Size = n.Length
+                })).ToArray();
             List.Items = items;
 
             Task.Run(() =>

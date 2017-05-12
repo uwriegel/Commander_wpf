@@ -61,6 +61,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ColumnsControl.cs" />
+    <Compile Include="Data\DirectoryItem.cs" />
     <Compile Include="Data\FileItem.cs" />
     <Compile Include="Data\MainWindowDataContext.cs" />
     <Compile Include="Data\StatusBar.cs" />
