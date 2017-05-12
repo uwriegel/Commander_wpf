@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace Commander
 {
-    public class NameConverter : IValueConverter
+    public class ExtensionConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -17,8 +17,9 @@ namespace Commander
             {
                 var pos = text.LastIndexOf('\\');
                 if (pos != 0)
-                    text = text.Substring(pos);
-                text = text.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                    text = text.Substring(pos + 1);
+                var parts = text.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+                text = parts.Length > 1 ? parts[1] : null;
             }
             return text;
         }

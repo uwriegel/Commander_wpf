@@ -71,8 +71,9 @@
       <DependentUpon>FileItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileVersionInfo.cs" />
-    <Compile Include="NameConverter.cs" />
-    <Compile Include="ParentItem.cs" />
+    <Compile Include="ValueConverters\ExtensionConverter.cs" />
+    <Compile Include="ValueConverters\NameConverter.cs" />
+    <Compile Include="Data\ParentItem.cs" />
     <Compile Include="ValueConverters\FileSizeConverter.cs" />
     <Page Include="FileItemControl.xaml">
       <SubType>Designer</SubType>
@@ -144,6 +145,11 @@
   <ItemGroup>
     <None Include="Resources\Kirk.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\parentfolder.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

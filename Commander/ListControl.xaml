@@ -49,6 +49,7 @@
                                 <Grid>
                                     <Border Padding="1"
                                             Name="contentBorder"
+                                            Background="Transparent"
                                             SnapsToDevicePixels="true" >
                                         <Border.Style>
                                             <Style>

@@ -9,6 +9,8 @@
     <UserControl.Resources>
         <local:FileIconConverter x:Key="FileIconConverter" />
         <local:FileSizeConverter x:Key="FileSizeConverter" />
+        <local:NameConverter x:Key="NameConverter" />
+        <local:ExtensionConverter x:Key="ExtensionConverter" />
 
         <DataTemplate DataType="{x:Type local:ParentItem}">
             <DataTemplate.Resources>
@@ -17,8 +19,8 @@
                 </Style>
             </DataTemplate.Resources>
                 <Canvas  Height="16" >
-                    <Border Width="16" Height="16" HorizontalAlignment="Left"></Border>
-                    <TextBlock Text="{Binding Name}" Canvas.Left="20" 
+                    <Image Width="16" Height="16" HorizontalAlignment="Left" Source="Resources/parentfolder.png"></Image>
+                    <TextBlock Text=".." Canvas.Left="20" 
                                Width="{Binding ColumnsSizes.Size1, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
                 </Canvas>
         </DataTemplate>
@@ -30,10 +32,10 @@
                 </Style>
             </DataTemplate.Resources>
             <Canvas  Height="16" >
-                <Border Width="16" Height="16" Background="{Binding Name, Converter={StaticResource FileIconConverter}}" HorizontalAlignment="Left"></Border>
-                <TextBlock Text="{Binding Name}" Canvas.Left="20" 
+                <Image Width="16" Height="16" HorizontalAlignment="Left" Source="Resources/folder.png"></Image>
+                <TextBlock Text="{Binding Name, Converter={StaticResource NameConverter}}" Canvas.Left="20" 
                                Width="{Binding ColumnsSizes.Size1, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
-                <TextBlock Text="{Binding Extension}" 
+                <TextBlock Text="{Binding Name, Converter={StaticResource ExtensionConverter}}"
                                     Width="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
                                     Canvas.Left="{Binding ColumnsSizes.Left2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
                 <TextBlock Text="{Binding Date}" 
@@ -50,9 +52,9 @@
             </DataTemplate.Resources>
             <Canvas  Height="16" >
                 <Border Width="16" Height="16" Background="{Binding Name, Converter={StaticResource FileIconConverter}}" HorizontalAlignment="Left"></Border>
-                <TextBlock Text="{Binding Name}" Canvas.Left="20" 
+                <TextBlock Text="{Binding Name, Converter={StaticResource NameConverter}}" Canvas.Left="20" 
                                Width="{Binding ColumnsSizes.Size1, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
-                <TextBlock Text="{Binding Extension}" 
+                <TextBlock Text="{Binding Name, Converter={StaticResource ExtensionConverter}}" 
                                     Width="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
                                     Canvas.Left="{Binding ColumnsSizes.Left2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
                 <TextBlock Text="{Binding Date}" 
