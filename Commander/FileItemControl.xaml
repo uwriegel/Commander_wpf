@@ -6,6 +6,38 @@
              xmlns:local="clr-namespace:Commander"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local:FileIconConverter x:Key="FileIconConverter" />
+        <local:FileSizeConverter x:Key="FileSizeConverter" />
+
+        <DataTemplate DataType="{x:Type local:Item}">
+            <DataTemplate.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                </Style>
+            </DataTemplate.Resources>
+                <Canvas  Height="16" >
+                    <Border Width="16" Height="16" Background="{Binding Name, Converter={StaticResource FileIconConverter}}" HorizontalAlignment="Left"></Border>
+                    <TextBlock Text="{Binding Name}" Canvas.Left="20" 
+                               Width="{Binding ColumnsSizes.Size1, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
+                    <TextBlock Text="{Binding Extension}" 
+                                    Width="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                    Canvas.Left="{Binding ColumnsSizes.Left2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
+                    <TextBlock Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" 
+                                    Width="{Binding ColumnsSizes.Size3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                    Canvas.Left="{Binding ColumnsSizes.Left3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"  />
+                    <TextBlock Text="{Binding Date}" 
+                                    Width="{Binding ColumnsSizes.Size4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                    Canvas.Left="{Binding ColumnsSizes.Left4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
+                    <TextBlock Text="{Binding Version}" 
+                                    Width="{Binding ColumnsSizes.Size5, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                    Canvas.Left="{Binding ColumnsSizes.Left5, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
+                </Canvas>
+        </DataTemplate>
+
+
+    </UserControl.Resources>
+
     <DockPanel>
         <TextBox DockPanel.Dock="Top" Background="{DynamicResource BackgroundColor}" 
                  Foreground="{DynamicResource ForegroundColor}"/>

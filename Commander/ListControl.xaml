@@ -8,11 +8,9 @@
              Focusable="True"
              d:DesignHeight="300" d:DesignWidth="300" >
     <UserControl.Resources>
-        <local:FileIconConverter x:Key="FileIconConverter" />
-        <local:FileSizeConverter x:Key="FileSizeConverter" />
         <local:ColumnsSizes x:Key="ColumnsSizes"/>
     </UserControl.Resources>
-    <Grid Grid.IsSharedSizeScope="True">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*"/>
@@ -47,67 +45,44 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <Border Name="Border" SnapsToDevicePixels="true" >
+                                <Grid>
+                                    <Border Padding="1"
+                                            Name="contentBorder"
+                                            SnapsToDevicePixels="true" >
+                                        <Border.Style>
+                                            <Style>
+                                                <Setter Property="TextBlock.Foreground" Value="{DynamicResource ForegroundColor}" />
+                                            </Style>
+                                        </Border.Style>
                                     <ContentPresenter/>
-                                </Border>
+                                    </Border>
+                                    <Border Name="border" 
+                                            BorderThickness="1" BorderBrush="Red" Background="Transparent">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Visibility" Value="Hidden" />
+                                            </Style>
+                                        </Border.Style>
+                                    </Border>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsFocused" Value="True">
+                                        <Setter Property="Visibility" Value="Visible" TargetName="border" />
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                        <Setter Property="Background" Value="Blue" TargetName="contentBorder" />
+                                        <Setter Property="TextBlock.Foreground" Value="White" TargetName="contentBorder" />
+                                    </DataTrigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
+
                     <Setter Property="Margin" Value="0"></Setter>
                     <Setter Property="Padding" Value="0"></Setter>
                     <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 </Style>
             </ListBox.ItemContainerStyle>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <DataTemplate.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ForegroundColor}" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                    <Setter Property="TextBlock.Foreground" Value="White" />
-                                    <Setter Property="Background" Value="Blue" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-
-                        <Style TargetType="Border" x:Key="Rahmen">
-                            <Setter Property="Visibility" Value="Hidden"></Setter>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsFocused, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-
-                        <Style TargetType="TextBlock">
-                            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-                        </Style>
-                    </DataTemplate.Resources>
-                    <Grid>
-                        <Border d:DataContext="{d:DesignData /SampleData/FileItemSampleData.xaml}" Padding="1">
-                            <Canvas  Height="16" >
-                                <Border Width="16" Height="16" Background="{Binding Name, Converter={StaticResource FileIconConverter}}" HorizontalAlignment="Left"></Border>
-                                <TextBlock Text="{Binding Name}" Canvas.Left="20" Width="{Binding ColumnsSizes.Size1, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
-                                <TextBlock Text="{Binding Extension}" 
-                                       Width="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
-                                       Canvas.Left="{Binding ColumnsSizes.Left2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
-                                <TextBlock Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" 
-                                       Width="{Binding ColumnsSizes.Size3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
-                                       Canvas.Left="{Binding ColumnsSizes.Left3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"  />
-                                <TextBlock Text="{Binding Date}" 
-                                       Width="{Binding ColumnsSizes.Size4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
-                                       Canvas.Left="{Binding ColumnsSizes.Left4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
-                                <TextBlock Text="{Binding Version}" 
-                                       Width="{Binding ColumnsSizes.Size5, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
-                                       Canvas.Left="{Binding ColumnsSizes.Left5, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
-                            </Canvas>
-                        </Border>
-                        <Border Style="{StaticResource Rahmen}" 
-                                BorderThickness="1" BorderBrush="Red" Background="Transparent"></Border>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
 </UserControl>

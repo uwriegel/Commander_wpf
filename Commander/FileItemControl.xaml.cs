@@ -21,19 +21,20 @@ namespace Commander
         public FileItemControl()
         {
             InitializeComponent();
-            var di = new DirectoryInfo(@"c:\windows");
-            List.Items = di.GetFiles().Select(n => new FileItem
+            var di = new DirectoryInfo(@"c:\windows\system32");
+            items = di.GetFiles().Select(n => new FileItem
             {
                 Name = n.FullName,
                 Date = n.LastAccessTime,
                 Size = n.Length
             }).ToArray();
+            List.Items = items;
 
             Task.Run(() =>
             {
                 try
                 {
-                    foreach (var item in List.Items)
+                    foreach (var item in (items as FileItem[]))
                         item.Version = FileVersion.Get(item.Name);
                 }
                 catch
@@ -41,5 +42,7 @@ namespace Commander
                 }
             });
         }
+
+        Item[] items;
     }
 }

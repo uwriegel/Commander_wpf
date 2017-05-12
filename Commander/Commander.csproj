@@ -61,6 +61,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ColumnsControl.cs" />
+    <Compile Include="Data\FileItem.cs" />
     <Compile Include="Data\MainWindowDataContext.cs" />
     <Compile Include="Data\StatusBar.cs" />
     <Compile Include="EventArgs\ColumnSizeChangedEventArgs.cs" />
@@ -69,6 +70,7 @@
       <DependentUpon>FileItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileVersionInfo.cs" />
+    <Compile Include="NameConverter.cs" />
     <Compile Include="ValueConverters\FileSizeConverter.cs" />
     <Page Include="FileItemControl.xaml">
       <SubType>Designer</SubType>
@@ -87,7 +89,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\FileItem.cs" />
+    <Compile Include="Data\Item.cs" />
     <Compile Include="ImageBruchConverter.cs" />
     <Compile Include="ValueConverters\FileIconConverter.cs" />
     <Compile Include="ListControl.xaml.cs">

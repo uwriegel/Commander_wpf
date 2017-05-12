@@ -19,19 +19,30 @@ namespace Commander
 {
     public partial class ListControl : UserControl
     {
-        public FileItem[] Items
+        public Item[] Items
         {
-            get { return GetValue(ItemsProperty) as FileItem[]; }
+            get { return GetValue(ItemsProperty) as Item[]; }
             set { SetValue(ItemsProperty, value); }
         }
-        public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register("Items", typeof(FileItem[]), typeof(ListControl),
+        public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register("Items", typeof(Item[]), typeof(ListControl),
             new PropertyMetadata(Items_PropertyChanged));
         static void Items_PropertyChanged(DependencyObject dO, DependencyPropertyChangedEventArgs e)
         {
             var listControl = dO as ListControl;
-            listControl.List.ItemsSource = e.NewValue as FileItem[];
+            listControl.List.ItemsSource = e.NewValue as Item[];
             listControl.Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(() =>
                 (listControl.List.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem)?.Focus()));
+        }
+
+        public static readonly DependencyProperty IsListItemSelectedProperty = DependencyProperty.RegisterAttached("IsListItemSelected",
+            typeof(bool), typeof(ListControl), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        public static void SetIsListItemSelected(UIElement element, Boolean value)
+        {
+            element.SetValue(IsListItemSelectedProperty, value);
+        }
+        public static bool GetIsListItemSelected(UIElement element)
+        {
+            return (bool)element.GetValue(IsListItemSelectedProperty);
         }
 
         public ListControl()
@@ -44,13 +55,13 @@ namespace Commander
 
         void SelectAll()
         {
-            foreach (var fileItem in List.ItemsSource as FileItem[] ?? new FileItem[0])
+            foreach (var fileItem in List.ItemsSource as Item[] ?? new Item[0])
                 fileItem.IsSelected = true;
         }
 
         void UnselectAll()
         {
-            foreach (var fileItem in List.ItemsSource as FileItem[] ?? new FileItem[0])
+            foreach (var fileItem in List.ItemsSource as Item[] ?? new Item[0])
                 fileItem.IsSelected = false;
         }
 
@@ -65,7 +76,7 @@ namespace Commander
                     UnselectAll();
                     break;
                 case Key.Insert:
-                    var fileItem = ((e.OriginalSource as ListBoxItem).DataContext as FileItem);
+                    var fileItem = ((e.OriginalSource as ListBoxItem).DataContext as Item);
                     fileItem.IsSelected = !fileItem.IsSelected;
                     var index = List.ItemContainerGenerator.IndexFromContainer(e.OriginalSource as ListBoxItem);
                     var next = List.ItemContainerGenerator.ContainerFromIndex(index + 1) as ListBoxItem;
@@ -74,17 +85,17 @@ namespace Commander
                 case Key.Home when (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift:
                     index = List.ItemContainerGenerator.IndexFromContainer(e.OriginalSource as ListBoxItem);
                     for (var i = 0; i <= index; i++)
-                        (List.ItemsSource as FileItem[])[i].IsSelected = true;
-                    for (var i = index + 1; i < (List.ItemsSource as FileItem[]).Length; i++)
-                        (List.ItemsSource as FileItem[])[i].IsSelected = false;
+                        (List.ItemsSource as Item[])[i].IsSelected = true;
+                    for (var i = index + 1; i < (List.ItemsSource as Item[]).Length; i++)
+                        (List.ItemsSource as Item[])[i].IsSelected = false;
                     e.Handled = true;
                     break;
                 case Key.End when (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift:
                     index = List.ItemContainerGenerator.IndexFromContainer(e.OriginalSource as ListBoxItem);
                     for (var i = 0; i < index; i++)
-                        (List.ItemsSource as FileItem[])[i].IsSelected = false;
-                    for (var i = index; i < (List.ItemsSource as FileItem[]).Length; i++)
-                        (List.ItemsSource as FileItem[])[i].IsSelected = true;
+                        (List.ItemsSource as Item[])[i].IsSelected = false;
+                    for (var i = index; i < (List.ItemsSource as Item[]).Length; i++)
+                        (List.ItemsSource as Item[])[i].IsSelected = true;
                     e.Handled = true;
                     break;
             }
@@ -94,7 +105,7 @@ namespace Commander
         {
             var item = ItemsControl.ContainerFromElement(List, e.OriginalSource as DependencyObject) as ListBoxItem;
             if (item != null)
-                (item.DataContext as FileItem).IsSelected = !(item.DataContext as FileItem).IsSelected;
+                (item.DataContext as Item).IsSelected = !(item.DataContext as Item).IsSelected;
         }
 
         public ColumnsSizes ColumnsSizes 
