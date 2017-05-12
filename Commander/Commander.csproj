@@ -92,7 +92,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data\Item.cs" />
-    <Compile Include="ImageBruchConverter.cs" />
+    <Compile Include="ValueConverters\ImageBrushConverter.cs" />
     <Compile Include="ValueConverters\FileIconConverter.cs" />
     <Compile Include="ListControl.xaml.cs">
       <DependentUpon>ListControl.xaml</DependentUpon>

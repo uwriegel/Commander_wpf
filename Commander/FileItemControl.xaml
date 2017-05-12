@@ -37,8 +37,8 @@
                                     Width="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
                                     Canvas.Left="{Binding ColumnsSizes.Left2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
                 <TextBlock Text="{Binding Date}" 
-                                    Width="{Binding ColumnsSizes.Size4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
-                                    Canvas.Left="{Binding ColumnsSizes.Left4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
+                                    Width="{Binding ColumnsSizes.Size3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                    Canvas.Left="{Binding ColumnsSizes.Left3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
             </Canvas>
         </DataTemplate>
 
@@ -56,11 +56,12 @@
                                     Width="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
                                     Canvas.Left="{Binding ColumnsSizes.Left2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
                 <TextBlock Text="{Binding Date}" 
-                                    Width="{Binding ColumnsSizes.Size4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
-                                    Canvas.Left="{Binding ColumnsSizes.Left4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
-                <TextBlock Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" 
                                     Width="{Binding ColumnsSizes.Size3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
-                                    Canvas.Left="{Binding ColumnsSizes.Left3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"  />
+                                    Canvas.Left="{Binding ColumnsSizes.Left3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
+                <TextBlock Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" 
+                           TextAlignment="Right"
+                                    Width="{Binding ColumnsSizes.Size4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
+                                    Canvas.Left="{Binding ColumnsSizes.Left4, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"  />
                 <TextBlock Text="{Binding Version}" 
                                     Width="{Binding ColumnsSizes.Size5, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
                                     Canvas.Left="{Binding ColumnsSizes.Left5, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>

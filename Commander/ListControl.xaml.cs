@@ -122,24 +122,34 @@ namespace Commander
         void ColumnsControl_ColumnSizeChangedEvent(object sender, ColumnSizeChangedEventArgs e)
         {
             ColumnsSizes.Size1 = e.Lengths[0] - 30;
+            if (ColumnsSizes.Size1 < 0)
+                ColumnsSizes.Size1 = 0;
             if (e.Lengths.Length > 1)
             {
                 ColumnsSizes.Size2 = e.Lengths[1] - 10;
+                if (ColumnsSizes.Size2 < 0)
+                    ColumnsSizes.Size2 = 0;
                 ColumnsSizes.Left2 = e.Lengths[0];
             }
             if (e.Lengths.Length > 2)
             {
                 ColumnsSizes.Size3 = e.Lengths[2] - 10;
+                if (ColumnsSizes.Size3 < 0)
+                    ColumnsSizes.Size3 = 0;
                 ColumnsSizes.Left3 = ColumnsSizes.Left2 + e.Lengths[1];
             }
             if (e.Lengths.Length > 3)
             {
                 ColumnsSizes.Size4 = e.Lengths[3] - 10;
+                if (ColumnsSizes.Size4 < 0)
+                    ColumnsSizes.Size4 = 0;
                 ColumnsSizes.Left4 = ColumnsSizes.Left3 + e.Lengths[2];
             }
             if (e.Lengths.Length > 4)
             {
                 ColumnsSizes.Size5 = e.Lengths[4] - 10;
+                if (ColumnsSizes.Size5 < 0)
+                    ColumnsSizes.Size5 = 0;
                 ColumnsSizes.Left5 = ColumnsSizes.Left4 + e.Lengths[3];
             }
         }

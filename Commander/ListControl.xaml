@@ -22,6 +22,7 @@
                 <Style TargetType="TextBlock">
                     <Setter Property="TextTrimming" Value="CharacterEllipsis" />
                     <Setter Property="Padding" Value="5, 0" />
+                    <Setter Property="SnapsToDevicePixels" Value="True" />
                     <Setter Property="Background" Value="Blue" />
                     <Setter Property="Foreground" Value="White" />
                 </Style>
@@ -30,7 +31,7 @@
                 <TextBlock Text="Name"/>
                 <TextBlock Text="Erw."/>
                 <TextBlock Text="Datum"/>
-                <TextBlock Text="Größe"/>
+                <TextBlock Text="Größe" TextAlignment="Right"/>
                 <TextBlock Text="Version"/>
             </local:ColumnsControl.Children>
         </local:ColumnsControl>
