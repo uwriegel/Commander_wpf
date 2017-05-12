@@ -38,7 +38,7 @@
                 <TextBlock Text="{Binding Name, Converter={StaticResource ExtensionConverter}}"
                                     Width="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
                                     Canvas.Left="{Binding ColumnsSizes.Left2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
-                <TextBlock Text="{Binding Date}" 
+                <TextBlock Text="{Binding Date, StringFormat=dd.MM.yyyy hh:mm}" 
                                     Width="{Binding ColumnsSizes.Size3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
                                     Canvas.Left="{Binding ColumnsSizes.Left3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
             </Canvas>
@@ -57,7 +57,7 @@
                 <TextBlock Text="{Binding Name, Converter={StaticResource ExtensionConverter}}" 
                                     Width="{Binding ColumnsSizes.Size2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
                                     Canvas.Left="{Binding ColumnsSizes.Left2, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
-                <TextBlock Text="{Binding Date}" 
+                <TextBlock Text="{Binding Date, StringFormat=dd.MM.yyyy hh:mm}" 
                                     Width="{Binding ColumnsSizes.Size3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"
                                     Canvas.Left="{Binding ColumnsSizes.Left3, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ListControl}}}"/>
                 <TextBlock Text="{Binding Size, Converter={StaticResource FileSizeConverter}}" 
