@@ -10,7 +10,7 @@
         <local:FileIconConverter x:Key="FileIconConverter" />
         <local:FileSizeConverter x:Key="FileSizeConverter" />
 
-        <DataTemplate DataType="{x:Type local:Item}">
+        <DataTemplate DataType="{x:Type local:FileItem}">
             <DataTemplate.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="TextTrimming" Value="CharacterEllipsis" />

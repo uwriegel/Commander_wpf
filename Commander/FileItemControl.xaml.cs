@@ -22,19 +22,19 @@ namespace Commander
         {
             InitializeComponent();
             var di = new DirectoryInfo(@"c:\windows\system32");
-            items = di.GetFiles().Select(n => new FileItem
+            items = Enumerable.Repeat((Item)new ParentItem(), 1).Concat(di.GetFiles().Select(n => new FileItem
             {
                 Name = n.FullName,
                 Date = n.LastAccessTime,
                 Size = n.Length
-            }).ToArray();
+            })).ToArray();
             List.Items = items;
 
             Task.Run(() =>
             {
                 try
                 {
-                    foreach (var item in (items as FileItem[]))
+                    foreach (var item in (items as Item[]).OfType<FileItem>())
                         item.Version = FileVersion.Get(item.Name);
                 }
                 catch

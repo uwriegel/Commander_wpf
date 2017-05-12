@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="FileVersionInfo.cs" />
     <Compile Include="NameConverter.cs" />
+    <Compile Include="ParentItem.cs" />
     <Compile Include="ValueConverters\FileSizeConverter.cs" />
     <Page Include="FileItemControl.xaml">
       <SubType>Designer</SubType>
