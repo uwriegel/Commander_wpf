@@ -74,7 +74,9 @@
 
     <DockPanel>
         <TextBox DockPanel.Dock="Top" Background="{DynamicResource BackgroundColor}" 
-                 Foreground="{DynamicResource ForegroundColor}"/>
-        <local:ListControl x:Name="List"/>
+                 Foreground="{DynamicResource ForegroundColor}" 
+                 PreviewKeyDown="TextBox_PreviewKeyDown"
+                 Text="{Binding Path, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:FileItemControl}}}"/>
+        <local:ListControl PreviewKeyDown="List_PreviewKeyDown" x:Name="List"/>
     </DockPanel>
 </UserControl>

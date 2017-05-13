@@ -49,7 +49,6 @@ namespace Commander
         {
             InitializeComponent();
             SizeChanged += ListControl_SizeChanged;
-            PreviewMouseDown += ListControl_PreviewMouseDown;
             PreviewKeyDown += ListControl_PreviewKeyDown;
         }
 
@@ -101,12 +100,12 @@ namespace Commander
             }
         }
 
-        void ListControl_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var item = ItemsControl.ContainerFromElement(List, e.OriginalSource as DependencyObject) as ListBoxItem;
-            if (item != null)
-                (item.DataContext as Item).IsSelected = !(item.DataContext as Item).IsSelected;
-        }
+        //void ListControl_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    var item = ItemsControl.ContainerFromElement(List, e.OriginalSource as DependencyObject) as ListBoxItem;
+        //    if (item != null)
+        //        (item.DataContext as Item).IsSelected = !(item.DataContext as Item).IsSelected;
+        //}
 
         public ColumnsSizes ColumnsSizes 
         {

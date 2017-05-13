@@ -1,0 +1,22 @@
+﻿<Window x:Class="Commander.ErrorBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Commander"
+        mc:Ignorable="d"
+        Title="Commander" Height="300" Width="300" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <DockPanel>
+        <Border DockPanel.Dock="Bottom" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" >
+            <Button Content="OK" HorizontalAlignment="Right" Margin="0, 10, 20, 10" Padding="25,0" IsDefault="True" Click="Button_Click"></Button>
+        </Border>
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Bottom" Margin="20" Name="Exception" Visibility="Collapsed"></TextBlock>
+            <TextBlock Margin="20" Name="Text"></TextBlock>
+            <Button Name="ExceptionButton" DockPanel.Dock="Right" HorizontalAlignment="Right" HorizontalContentAlignment="Center" 
+                    VerticalAlignment="Center" Margin="10" 
+                    Visibility="Collapsed"
+                    Click="ExceptionButton_Click">...</Button>
+        </DockPanel>
+    </DockPanel>
+</Window>

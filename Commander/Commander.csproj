@@ -65,6 +65,9 @@
     <Compile Include="Data\FileItem.cs" />
     <Compile Include="Data\MainWindowDataContext.cs" />
     <Compile Include="Data\StatusBar.cs" />
+    <Compile Include="ErrorBox.xaml.cs">
+      <DependentUpon>ErrorBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EventArgs\ColumnSizeChangedEventArgs.cs" />
     <Compile Include="ColumnsSizes.cs" />
     <Compile Include="FileItemControl.xaml.cs">
@@ -75,6 +78,10 @@
     <Compile Include="ValueConverters\NameConverter.cs" />
     <Compile Include="Data\ParentItem.cs" />
     <Compile Include="ValueConverters\FileSizeConverter.cs" />
+    <Page Include="ErrorBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FileItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -49,7 +49,7 @@
                                 <Grid>
                                     <Border Padding="1"
                                             Name="contentBorder"
-                                            Background="Transparent"
+                                            Background="#00ff0000"
                                             SnapsToDevicePixels="true" >
                                         <Border.Style>
                                             <Style>
@@ -59,7 +59,7 @@
                                     <ContentPresenter/>
                                     </Border>
                                     <Border Name="border" 
-                                            BorderThickness="1" BorderBrush="Red" Background="Transparent">
+                                            BorderThickness="1" BorderBrush="Red" >
                                         <Border.Style>
                                             <Style TargetType="Border">
                                                 <Setter Property="Visibility" Value="Hidden" />
@@ -71,6 +71,27 @@
                                     <Trigger Property="IsFocused" Value="True">
                                         <Setter Property="Visibility" Value="Visible" TargetName="border" />
                                     </Trigger>
+                                    <!--<Trigger Property="IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation To="#25ff0000" Storyboard.TargetName="contentBorder" 
+                                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                Duration="0:0:0.300"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation To="#00ff0000" From="#25ff0000" Storyboard.TargetName="contentBorder" 
+                                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                    FillBehavior="Stop"
+                                                                Duration="0:0:0.010"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>-->
                                     <DataTrigger Binding="{Binding IsSelected}" Value="True">
                                         <Setter Property="Background" Value="Blue" TargetName="contentBorder" />
                                         <Setter Property="TextBlock.Foreground" Value="White" TargetName="contentBorder" />

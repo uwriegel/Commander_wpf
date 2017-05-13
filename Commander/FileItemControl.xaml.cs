@@ -18,11 +18,44 @@ namespace Commander
 {
     public partial class FileItemControl : UserControl
     {
+        public string Path
+        {
+            get { return GetValue(PathProperty) as string; }
+            set { SetValue(PathProperty, value); }
+        }
+        public static readonly DependencyProperty PathProperty = DependencyProperty.Register("Path", typeof(string), typeof(FileItemControl));
+
         public FileItemControl()
         {
             InitializeComponent();
-            var di = new DirectoryInfo(@"c:\windows\system32");
-            items = Enumerable.Repeat((Item)new ParentItem(), 1)
+            ChangePath(@"c:\windows\system32");
+        }
+
+        public void ChangePath(string path)
+        {
+            try
+            {
+                Path = path;
+                switch (path)
+                {
+                    case "drives":
+                        break;
+                    default:
+                        ChangeDirectory(path);
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                ErrorBox.Show("Der Pfad konnte nicht geändert werden", e);
+            }
+        }
+
+        void ChangeDirectory(string directory)
+        {
+            var di = new DirectoryInfo(directory);
+            var pdi = di.Parent;
+            items = Enumerable.Repeat((Item)new ParentItem(pdi != null ? pdi.FullName : "drives"), 1)
                 .Concat(di.GetDirectories().Select(n => new DirectoryItem
                 {
                     Name = n.FullName,
@@ -47,6 +80,33 @@ namespace Commander
                 {
                 }
             });
+        }
+
+        void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Enter:
+                    ChangePath((sender as TextBox).Text);
+                    break;
+            }
+        }
+
+        void List_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Enter when ((e.OriginalSource as ListBoxItem)?.DataContext is ParentItem):
+                    var pi = (e.OriginalSource as ListBoxItem).DataContext as ParentItem;
+                    ChangePath(pi.Parent);
+                    e.Handled = true;
+                    break;
+                case Key.Enter when ((e.OriginalSource as ListBoxItem)?.DataContext is DirectoryItem):
+                    var di = (e.OriginalSource as ListBoxItem).DataContext as DirectoryItem;
+                    ChangePath(di.Name);
+                    e.Handled = true;
+                    break;
+            }
         }
 
         Item[] items;
