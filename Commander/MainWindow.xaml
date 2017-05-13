@@ -69,7 +69,14 @@
                    Foreground="White" Text="{Binding StatusBar.Text}" Height="19" Padding="1" >
         </TextBlock>
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="10" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition MinWidth="10"/>
+            </Grid.ColumnDefinitions>
             <local:FileItemControl />
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+            <local:FileItemControl Grid.Column="2"/>
         </Grid>
     </DockPanel>
 </Window>

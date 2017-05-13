@@ -14,6 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+// TODO: Tab-Steuerung zwischen den Grids
+// TODO: Shift-Tab zur Pfadeingabe
+// TODO: F9-Command
+
 namespace Commander
 {
     /// <summary>

@@ -14,6 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+// TODO: LastDirectory
+// TODO: Einschränken der Anzeige per Texteingabe
+// TODO: Drives
+
 namespace Commander
 {
     public partial class FileItemControl : UserControl
