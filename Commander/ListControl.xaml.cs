@@ -65,25 +65,12 @@ namespace Commander
         void ColumnsControl_ColumnSizeChangedEvent(object sender, ColumnSizeChangedEventArgs e)
         {
             var gv = List.View as GridView;
-
-            var size = e.Lengths[0];
-            if (size < 0)
-                size = 0;
-            gv.Columns[0].Width = size;
-
-            if (e.Lengths.Length > 1)
-            {
-                size = e.Lengths[1];
+            for (var i = 0; i< e.Lengths.Length; i++)
+            { 
+                var size = e.Lengths[i];
                 if (size < 0)
                     size = 0;
-                gv.Columns[1].Width = size;
-            }
-            if (e.Lengths.Length > 2)
-            {
-                size = e.Lengths[2];
-                if (size < 0)
-                    size = 0;
-                gv.Columns[2].Width = size;
+                gv.Columns[i].Width = size;
             }
         }
     }

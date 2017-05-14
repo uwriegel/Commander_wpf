@@ -76,7 +76,7 @@ namespace Commander
                     }
                 });
             }
-            ChangeDirectory(@"c:\windows");
+            ChangeDirectory(@"c:\windows\system32");
 
         }
 

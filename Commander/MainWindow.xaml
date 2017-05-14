@@ -7,6 +7,19 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Commander" Closing="Window_Closing">
+
+
+
+
+    <Window.Resources>
+        <local:FileIconConverter x:Key="FileIconConverter" />
+        <local:FileSizeConverter x:Key="FileSizeConverter" />
+        <local:NameConverter x:Key="NameConverter" />
+        <local:ExtensionConverter x:Key="ExtensionConverter" />
+    </Window.Resources>
+    
+    
+    
     <DockPanel>
         <Menu IsMainMenu="True"
               Background="White"
@@ -76,18 +89,22 @@
             </Grid.ColumnDefinitions>
             <local:FileItemControl />
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <local:ListControl x:Name="liste" Grid.Column="2">
+            <local:ListControl  x:Name="liste" Grid.Column="2" Margin="0,17,0,0">
+                <local:ListControl.Resources>
+                </local:ListControl.Resources>
                 <local:ListControl.View>
                     <GridView>
-                        <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Age" Width="50" DisplayMemberBinding="{Binding Extension}" />
-                        <GridViewColumn Header="Mail" Width="150">
+                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource NameConverter}}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource ExtensionConverter}}" />
+                        <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Version}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" TextTrimming="CharacterEllipsis" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource NameConverter}}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource ExtensionConverter}}" />
                     </GridView>
                 </local:ListControl.View>
             </local:ListControl>

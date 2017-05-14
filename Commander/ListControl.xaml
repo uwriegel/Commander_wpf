@@ -28,14 +28,14 @@
                 <TextBlock Text="Version"/>
             </local:ColumnsControl.Children>
         </local:ColumnsControl>
-        <ListView Name="List">
+        <ListView Name="List" SelectionMode="Multiple">
             <ListView.Resources>
                 <Style TargetType="TextBlock">
-                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-                    <Setter Property="SnapsToDevicePixels" Value="True" />
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
                 </Style>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
                     <Setter Property="SnapsToDevicePixels" Value="true"/>
                     <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                     <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -44,30 +44,31 @@
                             <ControlTemplate TargetType="ListBoxItem">
                                 <Grid>
                                     <Border Name="Border"
-                                            Padding="2"
+                                            Padding="1"
                                             SnapsToDevicePixels="true"
                                             Background="Transparent"/>
-                                    <Border Name="FocusBorder" Padding="3" Opacity="0" SnapsToDevicePixels="true" BorderBrush="Black" BorderThickness="1"/>
-                                    <GridViewRowPresenter Margin="2" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    <Border Name="FocusBorder" Padding="3" Visibility="Hidden" SnapsToDevicePixels="true" BorderBrush="Red" 
+                                            BorderThickness="1"/>
+                                    <GridViewRowPresenter x:Name="Content" Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                    </GridViewRowPresenter>
                                 </Grid>
                                 <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter TargetName="Border" Property="Background" Value="#FFECFAFF"/>
-                                    </Trigger>
                                     <Trigger Property="IsSelected" Value="true">
-                                        <Setter TargetName="Border" Property="Background" Value="Red"/>
-                                        <Setter Property="TextBlock.Foreground" Value="White"/>
-                                    </Trigger>
-                                    <Trigger Property="IsEnabled" Value="false">
-                                        <Setter Property="Foreground" Value="Gray"/>
+                                        <Setter TargetName="Border" Property="Background" Value="Blue"/>
+                                        <Setter TargetName="Content" Property="TextBlock.Foreground" Value="White"/>
                                     </Trigger>
                                     <Trigger Property="IsFocused" Value="True">
-                                        <Setter Property="Opacity" Value="0.4" TargetName="FocusBorder"/>
+                                        <Setter Property="Visibility" Value="Visible" TargetName="FocusBorder"/>
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="TextBlock.Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="Visibility" Value="Collapsed" />
