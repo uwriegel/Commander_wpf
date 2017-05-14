@@ -46,40 +46,48 @@ namespace Commander
             SizeToFit();
             MoveIntoView();
 
-            void ChangeDirectory(string directory)
-            {
-                var di = new DirectoryInfo(directory);
-                var pdi = di.Parent;
-                var items = Enumerable.Repeat((Item)new ParentItem(pdi != null ? pdi.FullName : "drives"), 1)
-                    .Concat(di.GetDirectories().Select(n => new DirectoryItem
-                    {
-                        Name = n.FullName,
-                        Date = n.LastAccessTime
-                    }))
-                    .Concat(di.GetFiles().Select(n => new FileItem
-                    {
-                        Name = n.FullName,
-                        Date = n.LastAccessTime,
-                        Size = n.Length
-                    })).ToArray();
-                liste.SetColumns(new[] { "Name", "Erw.", "Datum", "Größe", "Version" });
-                liste.ItemsSource = items;
-                liste1.ItemsSource = items;
+            PreviewKeyDown += MainWindow_PreviewKeyDown;
 
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        foreach (var item in (items as Item[]).OfType<FileItem>())
-                            item.Version = FileVersion.Get(item.Name);
-                    }
-                    catch
-                    {
-                    }
-                });
-            }
             ChangeDirectory(@"c:\windows\system32");
 
+        }
+
+        void ChangeDirectory(string directory)
+        {
+            var di = new DirectoryInfo(directory);
+            var pdi = di.Parent;
+            var items = Enumerable.Repeat((Item)new ParentItem(pdi != null ? pdi.FullName : "drives"), 1)
+                .Concat(di.GetDirectories().Select(n => new DirectoryItem
+                {
+                    Name = n.FullName,
+                    Date = n.LastAccessTime
+                }))
+                .Concat(di.GetFiles().Select(n => new FileItem
+                {
+                    Name = n.FullName,
+                    Date = n.LastAccessTime,
+                    Size = n.Length
+                })).ToArray();
+            liste.SetColumns(new[] { "Name", "Erw.", "Datum", "Größe", "Version" });
+            liste.ItemsSource = items;
+            liste1.ItemsSource = items;
+        }
+
+        private void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Enter when ((e.OriginalSource as ListBoxItem)?.DataContext is ParentItem):
+                    var pi = (e.OriginalSource as ListBoxItem).DataContext as ParentItem;
+                    ChangeDirectory(pi.Parent);
+                    e.Handled = true;
+                    break;
+                case Key.Enter when ((e.OriginalSource as ListBoxItem)?.DataContext is DirectoryItem):
+                    var di = (e.OriginalSource as ListBoxItem).DataContext as DirectoryItem;
+                    ChangeDirectory(di.Name);
+                    e.Handled = true;
+                    break;
+            }
         }
 
         void SizeToFit()

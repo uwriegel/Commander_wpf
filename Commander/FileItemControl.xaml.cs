@@ -72,18 +72,6 @@ namespace Commander
                     Size = n.Length
                 })).ToArray();
             List.Items = items;
-
-            Task.Run(() =>
-            {
-                try
-                {
-                    foreach (var item in (items as Item[]).OfType<FileItem>())
-                        item.Version = FileVersion.Get(item.Name);
-                }
-                catch
-                {
-                }
-            });
         }
 
         void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)

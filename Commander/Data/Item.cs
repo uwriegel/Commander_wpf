@@ -24,7 +24,7 @@ namespace Commander
         }
         DateTime _Date;
 
-        public long Size { get; set; }
+        public long Size { get; set; } = -1;
 
         public bool IsSelected
         {

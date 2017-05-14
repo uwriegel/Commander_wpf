@@ -15,6 +15,8 @@ namespace Commander
             if (value == null)
                 return null;
             var strNumber = value.ToString();
+            if (strNumber == "-1")
+                return null;
             var thSep = '.';
             if (strNumber.Length > 3)
             {
