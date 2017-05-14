@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,10 +52,39 @@ namespace Commander
             listControl.List.View = e.NewValue as ViewBase;
         }
 
+        public ObservableCollection<GridViewColumn> Columns { get; } = new ObservableCollection<GridViewColumn>();
+
+        public void SetColumns(string[] columnsNames)
+        {
+            if (!columnsNames.Equals(this.columnsNames))
+            {
+                ColumnsControl.Children.Clear();
+                var columns = columnsNames.Select(n => new TextBlock { Text = n });
+                foreach (var column in columns)
+                    ColumnsControl.Children.Add(column);
+                this.columnsNames = columnsNames;
+                //Resize();
+
+                var gridView = new GridView();
+                foreach (var columnName in columnsNames)
+                {
+                    var col = Columns.First(n => (string)n.Header == columnName);
+                    gridView.Columns.Add(col);
+                }
+                List.View = gridView;
+            }
+        }
+
         public ListControl()
         {
+            Columns.CollectionChanged += Columns_CollectionChanged;
             InitializeComponent();
-            SizeChanged += ListControl_SizeChanged; ;
+            SizeChanged += ListControl_SizeChanged; 
+        }
+
+        void Columns_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+
         }
 
         void ListControl_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -74,16 +104,24 @@ namespace Commander
                     if (n < actionId)
                         // Drop frame!
                         return;
-                    var gv = List.View as GridView;
-                    for (var i = 0; i < e.Lengths.Length; i++)
-                    {
-                        var size = e.Lengths[i];
-                        if (size < 0)
-                            size = 0;
-                        gv.Columns[i].Width = size;
-                    }
+                    Resize(e.Lengths);
                 }), actionId);
             };
         }
+
+        void Resize(double[] lengths)
+        {
+            var gv = List.View as GridView;
+            if (gv != null)
+                for (var i = 0; i < lengths.Length; i++)
+                {
+                    var size = lengths[i];
+                    if (size < 0)
+                        size = 0;
+                    gv.Columns[i].Width = size;
+                }
+        }
+
+        string[] columnsNames;
     }
 }

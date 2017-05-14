@@ -62,6 +62,7 @@ namespace Commander
                         Date = n.LastAccessTime,
                         Size = n.Length
                     })).ToArray();
+                liste.SetColumns(new[] { "Name", "Erw.", "Datum", "Größe", "Version" });
                 liste.ItemsSource = items;
                 liste1.ItemsSource = items;
 

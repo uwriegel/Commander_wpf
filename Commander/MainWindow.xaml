@@ -89,21 +89,19 @@
             </Grid.ColumnDefinitions>
             <!--<local:FileItemControl />-->
             <local:ListControl  x:Name="liste" Grid.Column="0" Margin="0,17,0,0">
-                <local:ListControl.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource NameConverter}}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource ExtensionConverter}}" />
-                        <GridViewColumn>
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Version}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" TextTrimming="CharacterEllipsis" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource NameConverter}}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource ExtensionConverter}}" />
-                    </GridView>
-                </local:ListControl.View>
+                <local:ListControl.Columns>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name, Converter={StaticResource NameConverter}}" />
+                    <GridViewColumn Header="Erw." DisplayMemberBinding="{Binding Name, Converter={StaticResource ExtensionConverter}}" />
+                    <GridViewColumn Header="Datum">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Version}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" TextTrimming="CharacterEllipsis" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Größe" DisplayMemberBinding="{Binding Name, Converter={StaticResource NameConverter}}" />
+                    <GridViewColumn Header="Version" DisplayMemberBinding="{Binding Name, Converter={StaticResource ExtensionConverter}}" />
+                </local:ListControl.Columns>
             </local:ListControl>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
             <local:ListControl  x:Name="liste1" Grid.Column="2" Margin="0,17,0,0">
