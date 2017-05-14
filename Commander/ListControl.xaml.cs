@@ -99,7 +99,7 @@ namespace Commander
             ColumnsControl.ColumnSizeChangedEvent += (s, e) =>
             {
                 actionId++;
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action<int>)(n =>
+                Dispatcher.BeginInvoke(DispatcherPriority.Send, (Action<int>)(n =>
                 {
                     if (n < actionId)
                         // Drop frame!

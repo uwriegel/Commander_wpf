@@ -13,6 +13,7 @@ namespace Commander
         public ParentItem(string parent)
         {
             Parent = parent;
+            Name = "..";
         }
     }
 }

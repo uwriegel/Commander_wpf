@@ -15,6 +15,8 @@ namespace Commander
             var text = value as string;
             if (text != null)
             {
+                if (text == "..")
+                    return text;
                 var pos = text.LastIndexOf('\\');
                 if (pos != 0)
                     text = text.Substring(pos + 1);

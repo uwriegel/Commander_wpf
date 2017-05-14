@@ -90,7 +90,16 @@
             <!--<local:FileItemControl />-->
             <local:ListControl  x:Name="liste" Grid.Column="0" Margin="0,17,0,0">
                 <local:ListControl.Columns>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name, Converter={StaticResource NameConverter}}" />
+                    <GridViewColumn Header="Name">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Border Width="16" Height="16" Background="{Binding Name, Converter={StaticResource FileIconConverter}}" HorizontalAlignment="Left"></Border>
+                                    <TextBlock Text="{Binding Name, Converter={StaticResource NameConverter}}" Margin="20, 0, 0, 0" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Erw." DisplayMemberBinding="{Binding Name, Converter={StaticResource ExtensionConverter}}" />
                     <GridViewColumn Header="Datum">
                         <GridViewColumn.CellTemplate>
@@ -107,15 +116,17 @@
             <local:ListControl  x:Name="liste1" Grid.Column="2" Margin="0,17,0,0">
                 <local:ListControl.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource NameConverter}}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource ExtensionConverter}}" />
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Version}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" TextTrimming="CharacterEllipsis" />
+                                    <Grid>
+                                        <Image Width="16" Height="16" HorizontalAlignment="Left" Source="Resources/folder.png"></Image>
+                                        <TextBlock Text="{Binding Name, Converter={StaticResource NameConverter}}" Margin="20, 0, 0, 0" />
+                                    </Grid>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource ExtensionConverter}}" />
                         <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource NameConverter}}" />
                         <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource ExtensionConverter}}" />
                     </GridView>
