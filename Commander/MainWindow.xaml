@@ -87,11 +87,26 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition MinWidth="10"/>
             </Grid.ColumnDefinitions>
-            <local:FileItemControl />
+            <!--<local:FileItemControl />-->
+            <local:ListControl  x:Name="liste" Grid.Column="0" Margin="0,17,0,0">
+                <local:ListControl.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource NameConverter}}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource ExtensionConverter}}" />
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Version}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" TextTrimming="CharacterEllipsis" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource NameConverter}}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource ExtensionConverter}}" />
+                    </GridView>
+                </local:ListControl.View>
+            </local:ListControl>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <local:ListControl  x:Name="liste" Grid.Column="2" Margin="0,17,0,0">
-                <local:ListControl.Resources>
-                </local:ListControl.Resources>
+            <local:ListControl  x:Name="liste1" Grid.Column="2" Margin="0,17,0,0">
                 <local:ListControl.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Name, Converter={StaticResource NameConverter}}" />

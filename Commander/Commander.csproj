@@ -69,7 +69,6 @@
       <DependentUpon>ErrorBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="EventArgs\ColumnSizeChangedEventArgs.cs" />
-    <Compile Include="ColumnsSizes.cs" />
     <Compile Include="FileItemControl.xaml.cs">
       <DependentUpon>FileItemControl.xaml</DependentUpon>
     </Compile>

@@ -7,9 +7,6 @@
              mc:Ignorable="d" 
              Focusable="True"
              d:DesignHeight="300" d:DesignWidth="300" >
-    <UserControl.Resources>
-        <local:ColumnsSizes x:Key="ColumnsSizes"/>
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />

@@ -63,6 +63,7 @@ namespace Commander
                         Size = n.Length
                     })).ToArray();
                 liste.ItemsSource = items;
+                liste1.ItemsSource = items;
 
                 Task.Run(() =>
                 {

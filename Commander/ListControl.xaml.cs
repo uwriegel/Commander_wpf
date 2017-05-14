@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Commander
 {
@@ -59,19 +60,30 @@ namespace Commander
         void ListControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             SizeChanged -= ListControl_SizeChanged;
-            ColumnsControl.ColumnSizeChangedEvent += ColumnsControl_ColumnSizeChangedEvent;
+            InitializeColumnSizeChanging();
         }
 
-        void ColumnsControl_ColumnSizeChangedEvent(object sender, ColumnSizeChangedEventArgs e)
+        void InitializeColumnSizeChanging()
         {
-            var gv = List.View as GridView;
-            for (var i = 0; i< e.Lengths.Length; i++)
-            { 
-                var size = e.Lengths[i];
-                if (size < 0)
-                    size = 0;
-                gv.Columns[i].Width = size;
-            }
+            var actionId = 0;
+            ColumnsControl.ColumnSizeChangedEvent += (s, e) =>
+            {
+                actionId++;
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action<int>)(n =>
+                {
+                    if (n < actionId)
+                        // Drop frame!
+                        return;
+                    var gv = List.View as GridView;
+                    for (var i = 0; i < e.Lengths.Length; i++)
+                    {
+                        var size = e.Lengths[i];
+                        if (size < 0)
+                            size = 0;
+                        gv.Columns[i].Width = size;
+                    }
+                }), actionId);
+            };
         }
     }
 }
