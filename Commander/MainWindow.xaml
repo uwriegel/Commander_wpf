@@ -76,7 +76,21 @@
             </Grid.ColumnDefinitions>
             <local:FileItemControl />
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <local:FileItemControl Grid.Column="2"/>
+            <local:ListControl x:Name="liste" Grid.Column="2">
+                <local:ListControl.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Age" Width="50" DisplayMemberBinding="{Binding Extension}" />
+                        <GridViewColumn Header="Mail" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Version}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" TextTrimming="CharacterEllipsis" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </local:ListControl.View>
+            </local:ListControl>
         </Grid>
     </DockPanel>
 </Window>

@@ -5,17 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Commander"
              mc:Ignorable="d" 
-             Focusable="True"
-             d:DesignHeight="300" d:DesignWidth="300" >
-    <UserControl.Resources>
-        <local:ColumnsSizes x:Key="ColumnsSizes"/>
-    </UserControl.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+             d:DesignHeight="300" d:DesignWidth="300">
+    <DockPanel>
         <local:ColumnsControl x:Name="ColumnsControl"
+                              DockPanel.Dock="Top"
                               SnapsToDevicePixels="True"
                               Background="White">
             <local:ColumnsControl.Resources>
@@ -35,77 +28,51 @@
                 <TextBlock Text="Version"/>
             </local:ColumnsControl.Children>
         </local:ColumnsControl>
-        <ListBox Name="List" BorderThickness="0" 
-                 Grid.Row="1"
-                 VirtualizingPanel.IsVirtualizing="true" 
-                 VirtualizingPanel.VirtualizationMode="Recycling"
-                 HorizontalContentAlignment="Stretch">
-
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
+        <ListView Name="List">
+            <ListView.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="SnapsToDevicePixels" Value="True" />
+                </Style>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="SnapsToDevicePixels" Value="true"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    <Setter Property="OverridesDefaultStyle" Value="true"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
                                 <Grid>
-                                    <Border Padding="1"
-                                            Name="contentBorder"
-                                            Background="#00ff0000"
-                                            SnapsToDevicePixels="true" >
-                                        <Border.Style>
-                                            <Style>
-                                                <Setter Property="TextBlock.Foreground" Value="{DynamicResource ForegroundColor}" />
-                                            </Style>
-                                        </Border.Style>
-                                    <ContentPresenter/>
-                                    </Border>
-                                    <Border Name="border" 
-                                            BorderThickness="1" BorderBrush="Red" >
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Setter Property="Visibility" Value="Hidden" />
-                                            </Style>
-                                        </Border.Style>
-                                    </Border>
+                                    <Border Name="Border"
+                                            Padding="2"
+                                            SnapsToDevicePixels="true"
+                                            Background="Transparent"/>
+                                    <Border Name="FocusBorder" Padding="3" Opacity="0" SnapsToDevicePixels="true" BorderBrush="Black" BorderThickness="1"/>
+                                    <GridViewRowPresenter Margin="2" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </Grid>
                                 <ControlTemplate.Triggers>
-                                    <Trigger Property="IsFocused" Value="True">
-                                        <Setter Property="Visibility" Value="Visible" TargetName="border" />
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter TargetName="Border" Property="Background" Value="#FFECFAFF"/>
                                     </Trigger>
-                                    <!--<Trigger Property="IsMouseOver" Value="True">
-                                        <Trigger.EnterActions>
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <ColorAnimation To="#25ff0000" Storyboard.TargetName="contentBorder" 
-                                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                                Duration="0:0:0.300"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </Trigger.EnterActions>
-                                        <Trigger.ExitActions>
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <ColorAnimation To="#00ff0000" From="#25ff0000" Storyboard.TargetName="contentBorder" 
-                                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                                    FillBehavior="Stop"
-                                                                Duration="0:0:0.010"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </Trigger.ExitActions>
-                                    </Trigger>-->
-                                    <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                        <Setter Property="Background" Value="Blue" TargetName="contentBorder" />
-                                        <Setter Property="TextBlock.Foreground" Value="White" TargetName="contentBorder" />
-                                    </DataTrigger>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter TargetName="Border" Property="Background" Value="Red"/>
+                                        <Setter Property="TextBlock.Foreground" Value="White"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="false">
+                                        <Setter Property="Foreground" Value="Gray"/>
+                                    </Trigger>
+                                    <Trigger Property="IsFocused" Value="True">
+                                        <Setter Property="Opacity" Value="0.4" TargetName="FocusBorder"/>
+                                    </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
-
-                    <Setter Property="Margin" Value="0"></Setter>
-                    <Setter Property="Padding" Value="0"></Setter>
-                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 </Style>
-            </ListBox.ItemContainerStyle>
-        </ListBox>
-    </Grid>
+                <Style TargetType="GridViewColumnHeader">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+            </ListView.Resources>
+        </ListView>
+    </DockPanel>
 </UserControl>

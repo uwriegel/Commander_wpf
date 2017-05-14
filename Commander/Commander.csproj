@@ -74,6 +74,9 @@
       <DependentUpon>FileItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileVersionInfo.cs" />
+    <Compile Include="ListControl.xaml.cs">
+      <DependentUpon>ListControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValueConverters\ExtensionConverter.cs" />
     <Compile Include="ValueConverters\NameConverter.cs" />
     <Compile Include="Data\ParentItem.cs" />
@@ -90,6 +93,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ListControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -102,8 +109,8 @@
     <Compile Include="Data\Item.cs" />
     <Compile Include="ValueConverters\ImageBrushConverter.cs" />
     <Compile Include="ValueConverters\FileIconConverter.cs" />
-    <Compile Include="ListControl.xaml.cs">
-      <DependentUpon>ListControl.xaml</DependentUpon>
+    <Compile Include="ListControl1.xaml.cs">
+      <DependentUpon>ListControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
