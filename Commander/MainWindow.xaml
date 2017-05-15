@@ -18,112 +18,12 @@
         <local:ExtensionConverter x:Key="ExtensionConverter" />
 
 
-        <Style x:Key="GridViewColumnHeaderGripper" TargetType="{x:Type Thumb}">
-            <Setter Property="Canvas.Right" Value="-9"/>
-            <Setter Property="Width" Value="18"/>
-            <Setter Property="Height" Value="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Border Background="Transparent" Padding="{TemplateBinding Padding}">
-                            <Rectangle Fill="White" HorizontalAlignment="Center" Width="1"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
+        
         <Style TargetType="TextBlock">
             <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         </Style>
 
-        <Style TargetType="{x:Type GridViewColumnHeader}">
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="3,0,0,0"/>
-            <Setter Property="Margin" Value="-2,0,0,0"/>
-            <Setter Property="Background" Value="Blue"/>
-            <Setter Property="Height" Value="16"/>
-            <Setter Property="TextBlock.Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-                        <Grid>
-                            <Border x:Name="HeaderBorder" BorderThickness="0" Background="{TemplateBinding Background}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition MaxHeight="5"/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <Border Padding="{TemplateBinding Padding}" Grid.RowSpan="2">
-                                        <ContentPresenter x:Name="HeaderContent" HorizontalAlignment="Stretch" 
-                                                          Margin="5,0,0,0" RecognizesAccessKey="True" 
-                                                          TextBlock.Foreground="White"
-                                                          SnapsToDevicePixels="True" 
-                                                          VerticalAlignment="Center">
-                                        </ContentPresenter>
-                                    </Border>
-                                </Grid>
-                            </Border>
-                            <Canvas>
-                                <Thumb x:Name="PART_HeaderGripper" Style="{StaticResource GridViewColumnHeaderGripper}"/>
-                            </Canvas>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="HeaderBorder" Value="DarkBlue"/>
-                                <Setter Property="Background" TargetName="PART_HeaderGripper" Value="Transparent"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="HeaderBorder" Value="#FFA8DFF4"/>
-                                <Setter Property="Visibility" TargetName="PART_HeaderGripper" Value="Hidden"/>
-                            </Trigger>
-                            <Trigger Property="Height" Value="Auto">
-                                <Setter Property="MinHeight" Value="20"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                            </Trigger>
-                            <Trigger Property="ActualWidth" Value="0" >
-                                <Setter Property="Visibility" TargetName="PART_HeaderGripper" Value="Collapsed"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="Role" Value="Floating">
-                    <Setter Property="Opacity" Value="0.4082"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-                                <Canvas x:Name="PART_FloatingHeaderCanvas">
-                                    <Rectangle Fill="#FF000000" Height="{TemplateBinding ActualHeight}" Opacity="0.4697" Width="{TemplateBinding ActualWidth}"/>
-                                </Canvas>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-                <Trigger Property="Role" Value="Padding">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-                                <Border x:Name="HeaderBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,0" Background="{TemplateBinding Background}"/>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="Height" Value="Auto">
-                                        <Setter Property="MinHeight" Value="16"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-
+        
 
 
 
@@ -208,8 +108,8 @@
                 <ColumnDefinition MinWidth="10"/>
             </Grid.ColumnDefinitions>
 
-            <ListView BorderThickness="0" Name="List" >
-                <ListView.View>
+            <local:ListControl x:Name="List">
+                <local:ListControl.View>
                     <GridView>
                         <GridViewColumn Header="Name">
                             <GridViewColumn.CellTemplate>
@@ -228,8 +128,8 @@
                         <GridViewColumn Header="Größe" DisplayMemberBinding="{Binding Size, Converter={StaticResource FileSizeConverter}}" />
                         <GridViewColumn Header="Version" DisplayMemberBinding="{Binding Version}" />
                     </GridView>
-                </ListView.View>
-            </ListView>
+                </local:ListControl.View>
+            </local:ListControl>
 
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
 

@@ -115,7 +115,7 @@ namespace Commander
         void ListControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             SizeChanged -= ListControl_SizeChanged;
-            ColumnsControl.ColumnSizeChangedEvent += ColumnsControl_ColumnSizeChangedEvent;
+            
         }
 
         void ColumnsControl_ColumnSizeChangedEvent(object sender, ColumnSizeChangedEventArgs e)

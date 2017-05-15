@@ -60,7 +60,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ColumnsControl.cs" />
     <Compile Include="Data\DirectoryItem.cs" />
     <Compile Include="Data\FileItem.cs" />
     <Compile Include="Data\MainWindowDataContext.cs" />
@@ -73,6 +72,7 @@
       <DependentUpon>FileItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileVersionInfo.cs" />
+    <Compile Include="ListControl.cs" />
     <Compile Include="ListControl2.xaml.cs">
       <DependentUpon>ListControl2.xaml</DependentUpon>
     </Compile>

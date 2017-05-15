@@ -61,19 +61,9 @@ namespace Commander
         {
             if (!columnsNames.Equals(this.columnsNames))
             {
-                ColumnsControl.Children.Clear();
-                var columns = columnsNames.Select(n => new TextBlock { Text = n });
-                foreach (var column in columns)
-                    ColumnsControl.Children.Add(column);
-                this.columnsNames = columnsNames;
                 //Resize();
 
                 var gridView = new GridView();
-                foreach (var columnName in columnsNames)
-                {
-                    var col = Columns.First(n => (string)n.Header == columnName);
-                    gridView.Columns.Add(col);
-                }
                 List.View = gridView;
             }
         }
@@ -99,7 +89,6 @@ namespace Commander
         void InitializeColumnSizeChanging()
         {
             var actionId = 0;
-            ColumnsControl.ColumnSizeChangedEvent += (s, e) =>
             {
                 actionId++;
 //                Dispatcher.BeginInvoke(DispatcherPriority.Input, (Action<int>)(n =>
@@ -107,7 +96,6 @@ namespace Commander
                  //   if (n < actionId)
                         // Drop frame!
                    //     return;
-                    Resize(e.Lengths);
   //              }), actionId);
             };
         }

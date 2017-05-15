@@ -7,23 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <DockPanel>
-        <local:ColumnsControl x:Name="ColumnsControl"
-                              DockPanel.Dock="Top"
-                              SnapsToDevicePixels="True"
-                              Background="White">
-            <local:ColumnsControl.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-                    <Setter Property="Padding" Value="5, 0" />
-                    <Setter Property="SnapsToDevicePixels" Value="True" />
-                    <Setter Property="Background" Value="Blue" />
-                    <Setter Property="Foreground" Value="White" />
-                </Style>
-            </local:ColumnsControl.Resources>
-            <local:ColumnsControl.Children>
-                <TextBlock Text="Name"/>
-            </local:ColumnsControl.Children>
-        </local:ColumnsControl>
+        
         <ListView Name="List" SelectionMode="Multiple">
             <ListView.Resources>
                 <Style TargetType="TextBlock">
