@@ -68,9 +68,21 @@ namespace Commander
                     Date = n.LastAccessTime,
                     Size = n.Length
                 })).ToArray();
-            liste.SetColumns(new[] { "Name", "Erw.", "Datum", "Größe", "Version" });
-            liste.ItemsSource = items;
-            liste1.ItemsSource = items;
+                        
+            List.ItemsSource = items;
+            List1.ItemsSource = items;
+
+            Task.Run(() =>
+            {
+                try
+                {
+                    foreach (var item in (items as Item[]).OfType<FileItem>())
+                        item.Version = FileVersion.Get(item.Name);
+                }
+                catch
+                {
+                }
+            });
         }
 
         private void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)

@@ -10,11 +10,14 @@ namespace Commander
     {
         public string Version
         {
-            get
+            get { return _Version; }
+            set
             {
-                if (_Version == null)
-                    _Version = FileVersion.Get(Name);
-                return _Version;
+                if (_Version != value)
+                {
+                    _Version = value;
+                    SetChanged(nameof(Version));
+                }
             }
         }
         string _Version;

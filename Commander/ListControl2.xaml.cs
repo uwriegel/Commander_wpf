@@ -24,18 +24,18 @@ namespace Commander
     /// <summary>
     /// Interaction logic for ListControl.xaml
     /// </summary>
-    public partial class ListControl : UserControl
+    public partial class ListControl2 : UserControl
     {
         public IEnumerable ItemsSource
         {
             get { return (IEnumerable)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
-        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ListControl),
+        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ListControl2),
             new FrameworkPropertyMetadata(ItemsSourceChanged));
         static void ItemsSourceChanged(DependencyObject dO, DependencyPropertyChangedEventArgs e)
         {
-            var listControl = dO as ListControl;
+            var listControl = dO as ListControl2;
             listControl.List.ItemsSource = e.NewValue as IEnumerable;
         }
 
@@ -47,11 +47,11 @@ namespace Commander
         {
             return (ViewBase)element.GetValue(ViewProperty);
         }
-        public static readonly DependencyProperty ViewProperty = DependencyProperty.RegisterAttached("View", typeof(ViewBase), typeof(ListControl),
+        public static readonly DependencyProperty ViewProperty = DependencyProperty.RegisterAttached("View", typeof(ViewBase), typeof(ListControl2),
             new FrameworkPropertyMetadata(ViewChanged));
         static void ViewChanged(DependencyObject dO, DependencyPropertyChangedEventArgs e)
         {
-            var listControl = dO as ListControl;
+            var listControl = dO as ListControl2;
             listControl.List.View = e.NewValue as ViewBase;
         }
 
@@ -78,7 +78,7 @@ namespace Commander
             }
         }
 
-        public ListControl()
+        public ListControl2()
         {
             Columns.CollectionChanged += Columns_CollectionChanged;
             InitializeComponent();
@@ -102,13 +102,13 @@ namespace Commander
             ColumnsControl.ColumnSizeChangedEvent += (s, e) =>
             {
                 actionId++;
-                Dispatcher.BeginInvoke(DispatcherPriority.Send, (Action<int>)(n =>
-                {
-                    if (n < actionId)
+//                Dispatcher.BeginInvoke(DispatcherPriority.Input, (Action<int>)(n =>
+               // {
+                 //   if (n < actionId)
                         // Drop frame!
-                        return;
+                   //     return;
                     Resize(e.Lengths);
-                }), actionId);
+  //              }), actionId);
             };
         }
 

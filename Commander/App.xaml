@@ -15,9 +15,9 @@
             <Style TargetType="ListView">
                 <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
             </Style>
-            <Style TargetType="TextBlock">
+            <!--<Style TargetType="TextBlock">
                 <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}" />
-            </Style>
+            </Style>-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

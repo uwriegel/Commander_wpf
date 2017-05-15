@@ -73,8 +73,8 @@
       <DependentUpon>FileItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileVersionInfo.cs" />
-    <Compile Include="ListControl.xaml.cs">
-      <DependentUpon>ListControl.xaml</DependentUpon>
+    <Compile Include="ListControl2.xaml.cs">
+      <DependentUpon>ListControl2.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValueConverters\ExtensionConverter.cs" />
     <Compile Include="ValueConverters\NameConverter.cs" />
@@ -88,7 +88,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListControl.xaml">
+    <Page Include="ListControl2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
