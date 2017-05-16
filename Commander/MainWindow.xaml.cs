@@ -49,7 +49,7 @@ namespace Commander
             PreviewKeyDown += MainWindow_PreviewKeyDown;
 
             ChangeDirectory(@"c:\windows\system32");
-
+            List.Focus();
         }
 
         void ChangeDirectory(string directory)

@@ -133,14 +133,14 @@
 
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
 
-            <ListView BorderThickness="0" Grid.Column="2" Name="List1" >
-                <ListView.View>
+            <local:ListControl x:Name="List1" Grid.Column="2">
+                <local:ListControl.View>
                     <GridView>
                         <GridViewColumn Header="Name">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <Border Width="16" Height="16" Background="{Binding Name,  Converter={StaticResource FileIconConverter}}" HorizontalAlignment="Left"></Border>
+                                        <Border Width="16" Height="16" Background="{Binding Name, Converter={StaticResource FileIconConverter}}" HorizontalAlignment="Left"></Border>
                                         <TextBlock Foreground="{TemplateBinding TextBlock.Foreground}" 
                                                TextTrimming="CharacterEllipsis"
                                                Text="{Binding Name, Converter={StaticResource NameConverter}}" Margin="20, 0, 0, 0" />
@@ -153,8 +153,8 @@
                         <GridViewColumn Header="Größe" DisplayMemberBinding="{Binding Size, Converter={StaticResource FileSizeConverter}}" />
                         <GridViewColumn Header="Version" DisplayMemberBinding="{Binding Version}" />
                     </GridView>
-                </ListView.View>
-            </ListView>
+                </local:ListControl.View>
+            </local:ListControl>
         </Grid>
     </DockPanel>
 </Window>
